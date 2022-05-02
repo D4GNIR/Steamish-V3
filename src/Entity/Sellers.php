@@ -22,10 +22,10 @@ class Sellers
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $email;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $location;
 
-    #[ORM\Column(type: 'string', length: 16)]
+    #[ORM\Column(type: 'string', length: 16, nullable: true)]
     private ?string $phoneNumber;
 
     public function getId(): ?int
