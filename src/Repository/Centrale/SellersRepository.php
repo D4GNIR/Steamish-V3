@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Centrale;
 
-use App\Entity\Sellers;
+use App\Entity\Centrale\Sellers;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

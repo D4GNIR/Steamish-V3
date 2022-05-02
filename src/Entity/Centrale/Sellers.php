@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Centrale;
 
-use App\Repository\SellersRepository;
+use App\Repository\Centrale\SellersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SellersRepository::class)]

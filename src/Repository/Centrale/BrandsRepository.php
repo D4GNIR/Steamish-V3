@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Centrale;
 
-use App\Entity\Models;
+use App\Entity\Centrale\Brands;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Models>
+ * @extends ServiceEntityRepository<Brands>
  *
- * @method Models|null find($id, $lockMode = null, $lockVersion = null)
- * @method Models|null findOneBy(array $criteria, array $orderBy = null)
- * @method Models[]    findAll()
- * @method Models[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Brands|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Brands|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Brands[]    findAll()
+ * @method Brands[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ModelsRepository extends ServiceEntityRepository
+class BrandsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Models::class);
+        parent::__construct($registry, Brands::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Models $entity, bool $flush = true): void
+    public function add(Brands $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class ModelsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Models $entity, bool $flush = true): void
+    public function remove(Brands $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,15 +48,15 @@ class ModelsRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Models[] Returns an array of Models objects
+    //  * @return Brands[] Returns an array of Brands objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
+            ->orderBy('b.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -65,10 +65,10 @@ class ModelsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Models
+    public function findOneBySomeField($value): ?Brands
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
