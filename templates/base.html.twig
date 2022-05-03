@@ -2,8 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Toto fait du vélo !{% endblock %}</title>
+        <title>{% block title %}Steamish{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://kit.fontawesome.com/37d81ace64.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('styles') }}
         {% endblock %}
@@ -11,6 +12,7 @@
     <body>
         <header>
             {% block header %}
+                {% include 'common/_navbar.html.twig' %}
             {% endblock %}
         </header>
         {% block body %}
