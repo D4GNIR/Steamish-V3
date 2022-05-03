@@ -5,5 +5,15 @@ a{
 .logo{
     color: $orangeIG;
     font-family: $font-heading ;
+    font-size: 4em;
 }
 
+.btn-orange {
+    color: $white;
+    background-color: $orangeIG;
+    border-color: $orangeIG;
+}
+
+.Splus{
+    font-size: 1.5em; 
+}
