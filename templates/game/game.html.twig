@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ myGame.name }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">    
+        <div class="card col-4" style="width: 18rem;">
+            <img src="{{ myGame.thumbnailCover }}" class="card-img-top" alt="...">
+        </div>
+
+        <div class="card col-4" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title"><b></b>{{ myGame.name }}</h4>
+                <p class="card-text">
+                    <b>Description : </b>{{ myGame.description }}
+                    <br>
+                    <b>Sortie : </b>{{ myGame.publishedAt|date("m/d/Y") }}
+                    <br>
+                    <b>Prix : </b>{{ myGame.price }}
+                </p>
+            </div>
+        </div>
+
+        {# <div class="col-4">
+            {% for review in myGame.reviews %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body border border-dark rounded">
+                    <p>
+                        <b>Date : </b>{{ review.createdAt|date("m/d/Y") }}
+                        <br>
+                        <b>Content : </b>{{ review.content }}
+                        <br>
+                        <b>Note : </b>{{ review.note }}
+                        <br>
+                        <b>De : </b>{{ review.user.firstName }} {{ review.user.lastName }}                    
+                    </p>
+                </div>
+                </div>
+            {% endfor %}
+        </div> #}
+    </div>
+</div>
+{% endblock %}
