@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les éditeurs{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Les éditeurs</h2>
+        <div class="row mx-auto">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-4">
+                <h3>Nom</h3>
+            </div>
+            <div class="col-lg-4">
+                <h3>Site Web</h3>
+            </div>
+            <div class="col-lg-3">
+                <h3>Nb jeux</h3>
+            </div>
+        </div>
+        {% for publisher in publishers %}
+            <div class="row">
+                <div class="col-lg-1">
+                    <img src="{{ publisher.country.urlFlag }}">
+                </div>
+                <div class="col-lg-4">
+                    {{ publisher.name }}
+                </div>
+                <div class="col-lg-4">
+                    {{ publisher.website }}
+                </div>
+                <div class="col-lg-3">
+                    {{ publisher.games|length }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
