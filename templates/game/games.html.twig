@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les jeux{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for myGame in gameEntities %}
+                <div class="col-4">
+                    <div class="card-game" style="width: 16rem;">
+                        <div class="container-image">
+                            <div class="card-body">
+                                <a href="{{ path('gameId', {'id': myGame.id}) }}" class="btn btn-dark">
+                                    <img src="{{ myGame.thumbnailCover }}" class="card-img-top" alt="...">
+                                </a>
+                                <div class="container-price">
+                                    {{ myGame.price }}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="game-title text-center">{{ myGame.name }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
