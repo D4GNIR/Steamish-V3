@@ -17,10 +17,10 @@ class HomeController extends AbstractController
     ): Response
     {
         return $this->render('home/index.html.twig', [
-            'lastPublishedGames' => $gameRepository->getLastPublishedGames(),
-            'mostPlayedGames' => $gameRepository->getMostPlayedGames(),
-            'lastComments' => $commentRepository->getLastComments(),
-            'mostBoughtGames' => $gameRepository->getMostBoughtGames()
+            // 'lastPublishedGames' => $gameRepository->getLastPublishedGames(),
+            // 'mostPlayedGames' => $gameRepository->getMostPlayedGames(),
+            // 'lastComments' => $commentRepository->getLastComments(),
+            // 'mostBoughtGames' => $gameRepository->getMostBoughtGames()
         ]);
     }
 
