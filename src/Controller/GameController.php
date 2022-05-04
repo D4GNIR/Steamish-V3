@@ -30,8 +30,8 @@ class GameController extends AbstractController
         ]);
     }
 
-    // Récupérer un jeu avec son ID
-    #[Route('/{name}', name: 'gameName')]
+    // // Récupérer un jeu avec son ID
+    #[Route('/jeu/{name}', name: 'gameName')]
     public function getOneGameByName($name): Response
     {
         return $this->render('game/game.html.twig', [
@@ -39,11 +39,11 @@ class GameController extends AbstractController
         ]);
     }
 
-    // #[Route('/game', name: 'app_game')]
-    // public function index(): Response
-    // {
-    //     return $this->render('game/game.html.twig', [
-    //         'controller_name' => 'GameController',
-    //     ]);
-    // }
+    #[Route('/game', name: 'app_game')]
+    public function index(): Response
+    {
+        return $this->render('game/game.html.twig', [
+            'controller_name' => 'GameController',
+        ]);
+    }
 }
