@@ -6,6 +6,7 @@ use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @method Account|null find($id, $lockMode = null, $lockVersion = null)
  * @method Account|null findOneBy(array $criteria, array $orderBy = null)
