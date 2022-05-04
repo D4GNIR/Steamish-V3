@@ -9,11 +9,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PublisherController extends AbstractController
 {
-    #[Route('/editeur', name: 'app_publisher')]
-    public function index(PublisherRepository $publisherRepository): Response
+    public function __construct(private PublisherRepository $publisherRepository)
+    {
+    }
+
+    #[Route('/', name: 'app_publisher')]
+    public function index(): Response
     {
         return $this->render('publisher/index.html.twig', [
-            'publishers' => $publisherRepository->getPublishersAll()
+            'publishers' => $this->publisherRepository->getPublishersAll()
+        ]);
+    }
+
+    #[Route('/{slug}', name: 'app_publisher_show')]
+    public function show(string $slug): Response
+    {
+        return $this->render('publisher/show.html.twig', [
+            'publisher' => $this->publisherRepository->getPublisherBySlug($slug)
         ]);
     }
 }
