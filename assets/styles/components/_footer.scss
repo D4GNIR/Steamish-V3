@@ -1,0 +1,59 @@
+.footer-link{
+    margin-top: 0.5em;
+    text-decoration: none;
+    color: $whiteIG;
+    &:hover{
+        color: $orangeIG;
+    }
+}
+
+.icons{
+    background-color: rgba(255, 84, 0, 0.2);
+    border-radius: 50%;
+    justify-content: center;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+    transition: transform .1s;
+}
+
+.icons:hover{
+    -ms-transform: scale(1.15); /* IE 9 */
+    -webkit-transform: scale(1.15); /* Safari 3-8 */
+    transform: scale(1.15);
+    }
+
+.twitter{
+    color: rgb(29 161 242);
+    position: relative;
+    top: 20px;
+    right: 5px;
+}
+
+.instagram{
+    color: rgb(88, 81, 219);
+    position: relative;
+    top: 20px;
+    right: 5px;
+}
+
+.facebook{
+    color: #3b5998;
+    position: relative;
+    top: 20px;
+    right: 5px;
+}
+
+.youtube{
+    color: rgb(255 0 0);
+    position: relative;
+    top: 20px;
+    right: 5px;
+}
+
+.twitch{
+    color: #6441a5;
+    position: relative;
+    top: 20px;
+    right: 5px;
+}
