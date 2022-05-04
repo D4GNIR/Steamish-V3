@@ -3,40 +3,35 @@
 {% block title %}Les éditeurs{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div style="height: 120px;">
-        </div>
+<div class="container">
+    <table class="table table-hover text-light table-dark">
 
-<table class="table table-dark">
-
-    <tr class="row">
-      <td class="col-lg-1">Drapeau</td>
-      <td class="col-lg-4">Nom</td>
-      <td class="col-lg-4">Site Web</td>
-      <td class="col-lg-3">Nombre Jeux</td>
-    </tr>
-
-
+        <tr class="row">
+            <td class="col-lg-1">Drapeau</td>
+            <td class="col-lg-4">Nom</td>
+            <td class="col-lg-4">Site Web</td>
+            <td class="col-lg-3">Nombre de jeux</td>
+        </tr>
         {% for publisher in publishers %}
-            <tr class="row">
-                <td class="col-lg-1">
-                    <img src="{{ publisher.country.urlFlag }}">
-                </td>
-                <td class="col-lg-4">
-                    {{ publisher.name }}
-                </td>
-                <td class="col-lg-4">
-                    {{ publisher.website }}
-                </td>
-                <td class="col-lg-3">
-                    {{ publisher.games|length }}
-                </td>
-            </tr>
+        <tr class="row">
+            <td class="col-lg-1">
+                <img src="{{ publisher.country.urlFlag }}">
+            </td>
+            <td class="col-lg-4">
+                {{ publisher.name }}
+            </td>
+            <td class="col-lg-4">
+               <a href="{{ publisher.website }}" target="_blank" class="link"> {{ publisher.website }}</a>
+            </td>
+            <td class="col-lg-3">
+                {{ publisher.games|length }}
+            </td>
+        </tr>
         {% endfor %}
 
-</table>
-  </div>
+    </table>
+</div>
 
-  
+
 
 {% endblock %}
