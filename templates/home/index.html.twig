@@ -1,26 +1,113 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }}
-    OK
+{{ parent() }}
+OK
 {% endblock %}
 
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+<style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
 
-    <div class="example-wrapper">
-
-
-        <a href="{{ path('app_publisher') }}">
-            Editeurs
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
+</style>
+<div class="container-fluid p-0 m-0">
+    <img class="img-fluid" src="https://s3.gaming-cdn.com/images/homeDisplay/campaign-banner-626b8f2b3d771.jpg"
+        alt="Pub">
+</div>
+    <div class="container text-center">
+        <a class="btn btn-steamish col-3" href="{{ path('app_publisher') }}">
+            Les Editeurs partenaires
         </a>
-
-        {% if message is defined %}
-            {{ message }}
-        {% endif %}
+                <a class="btn btn-steamish col-3" href="{{ path('games') }}">
+            Tous les jeux
+        </a>
     </div>
+<div class="example-wrapper">
+    {# Les jeux du moment#}
+    <div>
+        <h2>Les dernières sorties</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for myGame in lastPublishedGames %}
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
+                        <div class="container-image">
+                            <img src="{{ myGame.thumbnailCover }}" alt="...">
+                            <div class="container-price" [hidden]="!displayPrice">
+                                {{ myGame.price }}€
+                            </div>
+                        </div>
+                    </a>
+                    <p class="game-title text-center">{{ myGame.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {# Bandeau publicitaires#}
+    <div>
+
+
+
+    </div>
+    {# es Jeux les plus joués#}
+    <div>
+        <h2>Les jeux les plus joués</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for myGame in mostPlayedGames %}
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
+                        <div class="container-image">
+                            <img src="{{ myGame.thumbnailCover }}" alt="...">
+                            <div class="container-price" [hidden]="!displayPrice">
+                                {{ myGame.price }}€
+                            </div>
+                        </div>
+                    </a>
+                    <p class="game-title text-center">{{ myGame.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Bandeau publicitaires 2#}
+    <div>
+
+    </div>
+    {# Meilleures ventes#}
+        <div>
+        <h2>Les meilleures ventes</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for myGame in mostBoughtGames %}
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
+                        <div class="container-image">
+                            <img src="{{ myGame.thumbnailCover }}" alt="...">
+                            <div class="container-price" [hidden]="!displayPrice">
+                                {{ myGame.price }}€
+                            </div>
+                        </div>
+                    </a>
+                    <p class="game-title text-center">{{ myGame.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
 {% endblock %}
