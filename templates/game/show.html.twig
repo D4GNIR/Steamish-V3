@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ myGame.name }}{% endblock %}
+
+{% block body %}
+<div class="container my-3">
+    <div class="d-flex justify-content-around my-3">    
+        <div class="col-12 col-lg-6 bg-greyo">
+            <img src="{{ myGame.thumbnailLogo }}" class="card-img-top" alt="{{ myGame.slug }}">
+        </div>
+
+        <div class="col-12 col-lg-5 bg-greyo">
+            <h3><b>{{ myGame.name }}</b></h3>            
+            <p><b>Prix : </b>{{ myGame.price }}€</p>
+            <button type="button" class="btn btn-steamish"><i class="fa-regular fa-heart"></i></button>
+            <button type="button" class="btn btn-steamish">Acheter</button>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-around my-3">
+        <div class="col-12 col-lg-6 bg-greyo">
+            <p><b>À propos du jeu</b></p>
+            <p>{{ myGame.description }}</p>
+        </div>
+
+        <div class="col-12 col-lg-5 bg-greyo">
+            <p><b>Date de sortie: </b>{{ myGame.publishedAt|date("d M y") }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

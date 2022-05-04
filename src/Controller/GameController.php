@@ -16,7 +16,7 @@ class GameController extends AbstractController
     #[Route('/jeux', name: 'games')]
     public function getAllGames()
     {
-        return $this->render('game/games.html.twig', [
+        return $this->render('game/index.html.twig', [
             'gameEntities' => $this->gameRepository->findAll()
         ]);
     }
@@ -34,7 +34,7 @@ class GameController extends AbstractController
     #[Route('/jeu/{slug}', name: 'gameSlug')]
     public function getOneGameByName(string $slug): Response
     {
-        return $this->render('game/game.html.twig', [
+        return $this->render('game/show.html.twig', [
             'myGame' => $this->gameRepository->findOneBy(['slug' => $slug])
         ]);
     }

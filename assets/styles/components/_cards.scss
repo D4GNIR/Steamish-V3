@@ -6,13 +6,12 @@
       position: relative;
 
       &:hover {
-        transition: ease-in, 0.15s;
+        transition: ease, 0.20s;
         cursor: pointer;
         transform: scale(1.04);
       }
   
       > img {
-        transition: ease-out, 0.30s;
         height: 97%;
         width: 97%;
         border-radius: 15px;

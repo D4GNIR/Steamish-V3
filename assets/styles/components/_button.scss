@@ -1,5 +1,9 @@
 .btn-steamish {
     color: $whiteIG;
     background-color: $orangeIG;
-    border-color: $whiteIG;
+    border-color: $orangeIG;
+
+    &:hover{
+        background-color: lighten($color: $orangeIG, $amount: 10);
+    }
 }
