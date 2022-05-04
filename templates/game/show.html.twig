@@ -6,7 +6,11 @@
 <div class="container my-3">
     <div class="d-flex justify-content-around my-3">    
         <div class="col-12 col-lg-6 bg-greyo">
-            <img src="{{ myGame.thumbnailLogo }}" class="card-img-top" alt="{{ myGame.slug }}">
+            {% if myGame.thumbnailLogo is not null %}
+                <img src="{{ myGame.thumbnailLogo }}" class="card-img-top" alt="{{ myGame.slug }}">
+            {% else %}
+                <img src="./assets/images/maxresdefault.jpg">
+            {% endif %}
         </div>
 
         <div class="col-12 col-lg-5 bg-greyo text-center d-flex align-items-center">
