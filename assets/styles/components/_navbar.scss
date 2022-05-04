@@ -6,6 +6,9 @@ a{
     color: $orangeIG;
     font-family: $font-heading ;
     font-size: 4em;
+    &:hover{
+        color: $whiteIG;
+    }
 }
 
 .btn-orange {
