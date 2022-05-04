@@ -6,7 +6,7 @@
     <div class="container my-3">
         <div class="row">
             {% for myGame in gameEntities %}
-                <div class="card-game col-4">
+                <div class="card-game col-12 col-sm-6 col-md-4 col-lg-3">
                     <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
                         <div class="container-image">
                             <img src="{{ myGame.thumbnailCover }}" alt="...">
