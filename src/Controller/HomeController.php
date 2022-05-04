@@ -20,7 +20,6 @@ class HomeController extends AbstractController
             'mostPlayedGames' => $gameRepository->getMostGameByOrderBy('SUM(lib.gameTime)'),
             'lastComments' => $commentRepository->findBy([], ['createdAt' => 'DESC'], 4),
             'mostBoughtGames' => $gameRepository->getMostGameByOrderBy('COUNT(lib.game)'),
-
         ]);
     }
 }

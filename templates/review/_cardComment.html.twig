@@ -1,0 +1,10 @@
+
+
+    <div class="container-image">
+        <img src="{{ myGame.thumbnailCover }}" alt="...">
+        <div class="container-price" [hidden]="!displayPrice">
+            {{ myGame.price }}€
+        </div>
+    </div>
+
+<p class="game-title text-center">{{ myGame.name }}</p>
