@@ -40,7 +40,7 @@ OK
             <div class="row">
                 {% for myGame in lastPublishedGames %}
                 <div class="card-game col-12 col-md-6 col-lg-4">
-                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
+                    <a class="text-decoration-none" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
                         <div class="container-image">
                             <img src="{{ myGame.thumbnailCover }}" alt="...">
                             <div class="container-price" [hidden]="!displayPrice">
@@ -66,7 +66,7 @@ OK
             <div class="row">
                 {% for myGame in mostPlayedGames %}
                 <div class="card-game col-12 col-md-6 col-lg-4">
-                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
+                    <a class="text-decoration-none" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
                         <div class="container-image">
                             <img src="{{ myGame.thumbnailCover }}" alt="...">
                             <div class="container-price" [hidden]="!displayPrice">
@@ -93,7 +93,7 @@ OK
             <div class="row">
                 {% for myGame in mostBoughtGames %}
                 <div class="card-game col-12 col-md-6 col-lg-4">
-                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
+                    <a class="text-decoration-none" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
                         <div class="container-image">
                             <img src="{{ myGame.thumbnailCover }}" alt="...">
                             <div class="container-price" [hidden]="!displayPrice">
