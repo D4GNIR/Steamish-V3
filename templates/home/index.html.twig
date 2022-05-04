@@ -52,11 +52,11 @@ OK
     </div>
     {# Review #}
     <div>
-        <div>
+        <h2 class="m-3" id="most">Les derniers commentaires</h2>
+        <div class="row">
             {% for comment in lastComments %}
                 <div class="card-game col-12 col-md-6 col-lg-3">
-                {% dump comment %}
-                    {# {% include "review/_cardComment.html.twig" %} #}
+                    {% include "review/_cardComment.html.twig" %}
                 </div>
             {% endfor %}
         </div>

@@ -1,10 +1,12 @@
-
-
-    <div class="container-image">
-        <img src="{{ myGame.thumbnailCover }}" alt="...">
-        <div class="container-price" [hidden]="!displayPrice">
-            {{ myGame.price }}€
-        </div>
+<div class="card-body comment" style="height:200px;">
+    {# <h5 class="card-title">{{ comment.game.name }}</h5> #}
+    <a class="text-decoration-none" href="{{ path('gameSlug', {'slug': comment.game.name}) }}">{{ comment.game.name }}</a>
+    <p class="card-text text-truncate">{{ comment.content }}</p>
+    <div class="row">
+        <p class="card-text col-6"><i class="fa-solid fa-thumbs-up green"></i> <strong>{{ comment.upVotes }}</strong></p>
+        <p class="card-text col-6"><i class="fa-solid fa-thumbs-down red"></i> <strong>{{ comment.downVotes }}</strong></p>
     </div>
-
-<p class="game-title text-center">{{ myGame.name }}</p>
+    <div class="row">
+        <p>Le {{ comment.createdAt|date("m/d/Y") }} par {{ comment.account.name }}</p>
+    </div>
+</div>
