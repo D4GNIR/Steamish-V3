@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark common bg-darko">
+<nav class="navbar navbar-expand-lg navbar-dark common bg-darko fixed-top">
   <div class="container-fluid">
     <a class="logo" href="{{ path('app_home') }}">Steamish</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -10,13 +10,21 @@
         <div class="col-12">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active Splus" href="#">Les jeux du moment</a>
+              <a class="link Splus m-2" href="#sorties">Les dernières sorties</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active Splus" href="#">Top précommandes</a>
+              <a class="link Splus m-2" href="#most">Les jeux les plus joués</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active Splus" href="#">Meilleurs ventes</a>
+              <a class="link Splus m-2" href="#best">Les meilleures ventes</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="">
+              <a class="link Splus m-2" href="{{ path('games') }}">Tous les jeux</a>
+            </li>
+            <li class="nav-item">
+              <a class="link Splus m-2" href="{{ path('app_publisher') }}">Les éditeurs partenaires</a>
             </li>
           </ul>
         </div>

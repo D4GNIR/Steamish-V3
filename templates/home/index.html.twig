@@ -9,21 +9,15 @@ OK
 {% block body %}
 
 <div class="container-fluid p-0 m-0">
+    <div style="height: 100px;">
+    </div>
     <img class="img-fluid" src="https://s3.gaming-cdn.com/images/homeDisplay/campaign-banner-626b8f2b3d771.jpg"
         alt="Pub1">
-</div>
-<div class="container text-center mt-3">
-    <a class="btn btn-steamish col-3" href="{{ path('app_publisher') }}">
-        Les Editeurs partenaires
-    </a>
-            <a class="btn btn-steamish col-3" href="{{ path('games') }}">
-        Tous les jeux
-    </a>
 </div>
 <div class="container">
     {# Les jeux du moment#}
     <div>
-        <h2 class="mt-3">Les dernières sorties</h2>
+        <h2 class="m-3" id="sorties">Les dernières sorties</h2>
         <div class="container my-3">
             <div class="row">
                 {% for myGame in lastPublishedGames %}
@@ -35,13 +29,13 @@ OK
         </div>
     </div>
     {# Bandeau publicitaires#}
-    <div>
+    <div class="text-center">
          <a href="https://www.mcdonalds.fr/" target="_blank"><img class="img-fluid" src=" https://3.bp.blogspot.com/-Jwx6tcp8ZBA/WLdOdv3WZ5I/AAAAAAAAAho/_VfSK6bjIT8Em3g1Qt_14NIXkJVuWWyMQCEw/s1600/bandeau.jpg"
         alt="Pub 2"></a>
     </div>
     {# es Jeux les plus joués#}
     <div>
-        <h2 class="mt-3">Les jeux les plus joués</h2>
+        <h2 class="m-3" id="most">Les jeux les plus joués</h2>
         <div class="container my-3">
             <div class="row">
                 {% for myGame in mostPlayedGames %}
@@ -54,13 +48,13 @@ OK
     </div>
 
     {# Bandeau publicitaires 2#}
-    <div>
+    <div class="text-center">
         <a href="https://www.emp-online.fr/" target="_blank"><img class="img-fluid" src="https://blog-fr.orson.io/wp-content/uploads/2020/10/backmarket-displayad-screen-1024x246.png"
         alt="Pub 3"></a>
     </div>
     {# Meilleures ventes#}
         <div>
-        <h2 class="mt-3">Les meilleures ventes</h2>
+        <h2 class="m-3" id="best">Les meilleures ventes</h2>
         <div class="container my-3">
             <div class="row">
                 {% for myGame in mostBoughtGames %}

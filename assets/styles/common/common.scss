@@ -10,3 +10,12 @@ li{
 .bg-darko{
     background-color: $darkGreyIG;
 }
+
+.link{
+    margin-top: 0.5em;
+    text-decoration: none;
+    color: $whiteIG;
+    &:hover{
+        color: $orangeIG;
+    }
+}
