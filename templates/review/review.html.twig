@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comments{% endblock %}
+
+{% block body %}
+    <div class="col-4">
+        {% for comment in lastComments %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body border border-dark rounded">
+                <p>
+                    <b>Date : </b>{{ comment.createdAt|date("m/d/Y") }}
+                    <br>
+                    <b>Contenu : </b>{{ comment.content }}
+                    <br>
+                    <b>Note : </b>{{ comment.upVotes }}
+                    <br>
+                    <b>Compte : </b>{{ comment.account.name }}
+                    <br>
+                    <b>Jeu : </b>{{ comment.game.name }}                 
+                </p>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
