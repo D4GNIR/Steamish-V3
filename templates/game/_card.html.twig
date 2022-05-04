@@ -1,0 +1,11 @@
+
+
+<a class="text-decoration-none" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
+    <div class="container-image">
+        <img src="{{ myGame.thumbnailCover }}" alt="...">
+        <div class="container-price" [hidden]="!displayPrice">
+            {{ myGame.price }}€
+        </div>
+    </div>
+</a>
+<p class="game-title text-center">{{ myGame.name }}</p>

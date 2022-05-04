@@ -6,17 +6,8 @@
     <div class="container my-3">
         <div class="row">
             {% for myGame in gameEntities %}
-                <div class="card-game col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a class="text-decoration-none" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
-                        <div class="container-image">
-                            <img src="{{ myGame.thumbnailCover }}" alt="...">
-                            <div class="container-price" [hidden]="!displayPrice">
-                                {{ myGame.price }}€
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <p class="game-title text-center">{{ myGame.name }}</p>
+                <div class="card-game col-12 col-md-4 col-lg-3">
+                    {% include "game/_card.html.twig" %}
                 </div>
             {% endfor %}
         </div>
