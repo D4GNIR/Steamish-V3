@@ -3,23 +3,20 @@
 {% block title %}Tous les jeux{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container my-3">
         <div class="row">
             {% for myGame in gameEntities %}
-                <div class="col-4">
-                    <div class="card-game" style="width: 16rem;">
+                <div class="card-game col-4">
+                    <a class="text-decoration-none" href="{{ path('gameId', {'id': myGame.id}) }}">
                         <div class="container-image">
-                            <div class="card-body">
-                                <a href="{{ path('gameId', {'id': myGame.id}) }}" class="btn btn-dark">
-                                    <img src="{{ myGame.thumbnailCover }}" class="card-img-top" alt="...">
-                                </a>
-                                <div class="container-price">
-                                    {{ myGame.price }}
-                                </div>
+                            <img src="{{ myGame.thumbnailCover }}" alt="...">
+                            <div class="container-price" [hidden]="!displayPrice">
+                                {{ myGame.price }}€
                             </div>
                         </div>
-                        <p class="game-title text-center">{{ myGame.name }}</p>
-                    </div>
+                    </a>
+                    
+                    <p class="game-title text-center">{{ myGame.name }}</p>
                 </div>
             {% endfor %}
         </div>
