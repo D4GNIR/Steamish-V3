@@ -9,6 +9,7 @@
             {% if myGame.thumbnailCover is not null %}
                 <img src="{{ myGame.thumbnailCover }}" class="img-fluid container-cover d-flex mx-auto" alt="{{ myGame.slug }}">
             {% endif %}
+        </div>
         <div class="col-lg-6 col-md-6 bg-greyo my-3 fs-1">
             <div class="container">
                 <div class="d-flex align-items-center justify-content-center">
@@ -81,9 +82,13 @@
     <div class="row">
         <h4>Dans le même genre</h4>
 
-        {% for otherGame in myOthersGames %}
+        {% for otherGame in myOthersGames|slice(0, 3) %}
             <div class="card-game col-12 col-md-4 col-lg-3">
-                {% include "game/_card.html.twig" %}
+                {% include "game/_card.html.twig" with
+                    {
+                        'myGame': otherGame
+                    }
+                %}
             </div>
         {% endfor %}
     </div>
