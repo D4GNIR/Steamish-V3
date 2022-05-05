@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Comment;
 use App\Entity\Country;
 use App\Entity\Game;
+use App\Entity\Genre;
 use App\Entity\Library;
+use App\Entity\Publisher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -51,6 +54,27 @@ class GameRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    // select game, publi, country, genre, comments
+    // join all
+    // where slug
+    // orderby commentaires triex desc
+    // Pour les comments il faudra slice(0, 6) dans le html plus tard
+    public function getALotOfThings(string $slug): ?Game
+    {
+        return $this->createQueryBuilder('g')
+            ->select('g', 'com', 'cou', 'gen', 'pub')
+            ->leftJoin('g.comments', 'com')
+            ->join('g.countries', 'cou')
+            ->join('g.genres', 'gen')
+            ->leftJoin('g.publisher', 'pub')
+            ->where('g.slug = :slug')
+            ->orderBy('com.createdAt', 'DESC')
+            ->setParameter(':slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

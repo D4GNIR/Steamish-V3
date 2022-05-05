@@ -11,45 +11,63 @@
             {% endif %}
         </div>
 
-        <div class="col-lg-6 col-md-6 bg-greyo my-3">
+        <div class="col-lg-6 col-md-6 bg-greyo my-3 fs-1">
             {% if myGame.thumbnailLogo is not null %}
-                <img src="{{ myGame.thumbnailLogo }}" class="img-fluid container-logo d-flex mx-auto" alt="{{ myGame.slug }}">
+                <img src="{{ myGame.thumbnailLogo }}" class="img-fluid container-logo" alt="{{ myGame.slug }}">
             {% else %}
                 <h3 class="text-center">{{ myGame.name }}</h3>
             {% endif %}
 
-            <div class="container text-center mt-3 fs-3">
+            <div class="container text-center mt-3 d-flex">
                 {{ myGame.price }}€
                 <a type="button" class="btn btn-steamish"><i class="fa-regular fa-heart"></i></a>
                 <a type="button" class="btn btn-steamish">Acheter</a>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-6 col-md-6 bg-greyo my-3">
             <h4>À propos du jeu</h4>
+
             <p>{{ myGame.description }}</p>
         </div>
 
-        {{ dump(myGame) }}
+        {# {{ dump(myGame) }} #}
 
         <div class="col-lg-6 col-md-6 bg-greyo my-3">
-            {% for country in myGame.countries %}
-                <img src="{{ country.urlFlag }}" class="" alt="">
-            {% endfor %}
+            <h4>Détails</h4>
 
-            {% if myGame.publisher.name is defined %}
-                <p>{{ myGame.publisher.name }}</p>
-            {% endif %}
+            <p><b>Langue(s): </b>
+                {% for country in myGame.countries %}
+                    <img src="{{ country.urlFlag }}" class="" alt="">
+                {% endfor %}
+            </p>
 
-            {% for genre in myGame.genres %}
-                <p>{{ genre.name }}</p>
-            {% endfor %}
+            <p><b>Editeur(s): </b>
+                {% if myGame.publisher.name is defined %}                
+                    <a type="button" class="btn btn-steamish">{{ myGame.publisher.name }}</a>
+                {% endif %}
+            </p>
 
-            <p><b>Editeur(s): </b>Test</p>
-            <p><b>Date de sortie: </b>{{ myGame.publishedAt|date("d M y") }}</p>
-            <p><b>Genre(s): </b>Test</p>
+            <p><b>Genre(s): </b>
+                {% for genre in myGame.genres %}
+                    <a type="button" class="btn btn-steamish">{{ genre.name }}</a>
+                {% endfor %}
+            </p>
+
+            <p><b>Date de sortie: </b>{{ myGame.publishedAt|date("d M y") }}</p>          
         </div>
+    </div>
+
+    <div class="row">
+        <h4>Tests des joueurs</h4>
+
+        {% for comment in myGame.comments|slice(0, 6) %}
+            <div class="col-4">
+                {% include "review/_cardComment.html.twig" %}
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
