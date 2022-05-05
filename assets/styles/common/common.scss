@@ -28,3 +28,13 @@ li{
         color: $orangeIG;
     }
 }
+
+.linktwo{
+    margin-top: 0.5em;
+    text-decoration: none;
+    color: $whiteIG;
+    
+    &:hover{
+        color: $darkGreyIG;
+    }
+}
