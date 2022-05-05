@@ -82,7 +82,7 @@ class GameRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('g')
             ->select('g')
             ->join('g.genres', 'genres')
-            ->where('g.genres IN (:genres)')
+            ->where('genres IN (:genres)')
             ->setParameter('genres', $game->getGenres())
             ->andWhere('g != :currentGame')
             ->setParameter('currentGame', $game)

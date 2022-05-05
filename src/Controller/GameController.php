@@ -29,7 +29,7 @@ class GameController extends AbstractController
 
         return $this->render('game/show.html.twig', [
             'myGame' => $myGame,
-            // 'myOthersGames' => $this->gameRepository->getRelatedGames($myGame)
+            'myOthersGames' => $this->gameRepository->getRelatedGames($myGame)
         ]);
     }
 }
