@@ -180,4 +180,18 @@ class Account
 
         return $this;
     }
+
+    public function getTotalGameTime(): string {
+        $totalGameTime = 0;
+        foreach ($this->getLibraries() as $library) {
+            /** @var Library $library */
+            $totalGameTime += $library->getGameTime();
+        }
+        $hours = floor($totalGameTime / 3600);
+        $minutes = ($totalGameTime % 60);
+        if ($minutes < 10) {
+            $minutes = '0' . $minutes;
+        }
+        return $hours. 'h' . $minutes;
+    }
 }

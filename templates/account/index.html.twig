@@ -7,6 +7,7 @@
 <div class="container">
     <h1>{{ myAccount.name }}</h1>
     <p>Membre depuis {{ myAccount.createdAt|date("m/d/Y") }}</p>
+    <p>Temps de jeu total {{ myAccount.totalGameTime }}</p>
     <div>
         <h2 class="m-3" id="best">Les jeux de {{ myAccount.name }}</h2>
         <div class="container my-3">
@@ -20,11 +21,25 @@
                         }
                      %}
                      <div class="row">
-                     
                         <p class="{% if library.installed is empty %}red{% else %}green{% endif %}"><i class="fa-brands fa-instalod"></i></p>
                         <p class="col-6">Dernière partie : {{ library.lastUsedAt|date("m/d/Y") }}</p>
-                        <p class="col-6">Temps de jeu : {{ library.gameTime }}</p>
+                        <p class="col-6">Temps de jeu : {{ library.timeConverter }}</p>
                      </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <h2 class="m-3" id="best">Les commentaires de {{ myAccount.name }}</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for comment in myAccount.comments %}
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    {% include "review/_cardComment.html.twig" with 
+                        {
+                            'currentAccount': true,
+                        }
+                     %}
                 </div>
                 {% endfor %}
             </div>
