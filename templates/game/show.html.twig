@@ -12,16 +12,22 @@
         </div>
 
         <div class="col-lg-6 col-md-6 bg-greyo my-3 fs-1">
-            {% if myGame.thumbnailLogo is not null %}
-                <img src="{{ myGame.thumbnailLogo }}" class="img-fluid container-logo" alt="{{ myGame.slug }}">
-            {% else %}
-                <h3 class="text-center">{{ myGame.name }}</h3>
-            {% endif %}
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% if myGame.thumbnailLogo is not null %}
+                        <img src="{{ myGame.thumbnailLogo }}" class="img-fluid container-logo" alt="{{ myGame.slug }}">
+                    {% else %}
+                        <h3 class="text-center">{{ myGame.name }}</h3>
+                    {% endif %}
+                </div>
 
-            <div class="container text-center mt-3 d-flex">
-                {{ myGame.price }}€
-                <a type="button" class="btn btn-steamish"><i class="fa-regular fa-heart"></i></a>
-                <a type="button" class="btn btn-steamish">Acheter</a>
+                <div class="row">
+                    <div class="d-flex align-items-center justify-content-center">
+                        {{ myGame.price }}€
+                        <a class="btn btn-steamish mx-2"><i class="fa-regular fa-heart"></i></a>
+                        <a class="btn btn-steamish">Acheter</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,7 +70,7 @@
         <h4>Tests des joueurs</h4>
 
         {% for comment in myGame.comments|slice(0, 6) %}
-            <div class="col-4">
+            <div class="col-4 mb-3">
                 {% include "review/_cardComment.html.twig" %}
             </div>
         {% endfor %}
