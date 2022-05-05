@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>{{ myAccount.name }}</h1>
+    <p>Membre depuis {{ myAccount.createdAt|date("m/d/Y") }}</p>
+    <div>
+        <h2 class="m-3" id="best">Les jeux de {{ myAccount.name }}</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for library in myAccount.libraries %}
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    {% include "game/_card.html.twig" with 
+                        {
+                            'myGame': library.game,
+                            'hiddenPrice': true
+                        }
+                     %}
+                     <p>{{ library.lastUsedAt|date("m/d/Y") }}</p>
+                     <p>{{ library.gameTime }}</p>
+                     <p>{{ library.installed }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

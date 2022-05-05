@@ -7,6 +7,6 @@
         <p class="card-text col-6"><i class="fa-solid fa-thumbs-down red"></i> <strong>{{ comment.downVotes }}</strong></p>
     </div>
     <div class="row">
-        <p>Le {{ comment.createdAt|date("m/d/Y") }} par {{ comment.account.name }}</p>
+        <p>Le {{ comment.createdAt|date("m/d/Y") }} par <a class="text-decoration-none linktwo" href="{{ path('accountSlug', {'slug': comment.account.name}) }}">{{ comment.account.name }}</a></p>
     </div>
 </div>
