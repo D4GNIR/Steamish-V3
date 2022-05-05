@@ -19,9 +19,12 @@
                             'hiddenPrice': true
                         }
                      %}
-                     <p>{{ library.lastUsedAt|date("m/d/Y") }}</p>
-                     <p>{{ library.gameTime }}</p>
-                     <p>{{ library.installed }}</p>
+                     <div class="row">
+                     
+                        <p class="{% if library.installed is empty %}red{% else %}green{% endif %}"><i class="fa-brands fa-instalod"></i></p>
+                        <p class="col-6">Dernière partie : {{ library.lastUsedAt|date("m/d/Y") }}</p>
+                        <p class="col-6">Temps de jeu : {{ library.gameTime }}</p>
+                     </div>
                 </div>
                 {% endfor %}
             </div>
