@@ -3,31 +3,35 @@
 {% block title %}{{ myGame.name }}{% endblock %}
 
 {% block body %}
-<div class="container my-3">
-    <div class="d-flex justify-content-around my-3">    
-        <div class="col-12 col-lg-6 bg-greyo">
-            {% if myGame.thumbnailLogo is not null %}
-                <img src="{{ myGame.thumbnailLogo }}" class="card-img-top" alt="{{ myGame.slug }}">
-            {% else %}
-                <img src="./assets/images/maxresdefault.jpg">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 bg-greyo my-3">
+            {% if myGame.thumbnailCover is not null %}
+                <img src="{{ myGame.thumbnailCover }}" class="img-fluid container-cover d-flex mx-auto" alt="{{ myGame.slug }}">
             {% endif %}
         </div>
 
-        <div class="col-12 col-lg-5 bg-greyo text-center d-flex align-items-center">
-            <h3>{{ myGame.name }}</h3>            
-            <p class="fs-3">{{ myGame.price }}€</p>
-            <button type="button" class="btn btn-steamish"><i class="fa-regular fa-heart"></i></button>
-            <button type="button" class="btn btn-steamish">Acheter</button>
+        <div class="col-lg-6 col-md-6 bg-greyo my-3">
+            {% if myGame.thumbnailLogo is not null %}
+                <img src="{{ myGame.thumbnailLogo }}" class="img-fluid container-logo d-flex mx-auto" alt="{{ myGame.slug }}">
+            {% else %}
+                <h3 class="text-center">{{ myGame.name }}</h3>
+            {% endif %}
+
+            <div class="container text-center mt-3 fs-3">
+                {{ myGame.price }}€
+                <a type="button" class="btn btn-steamish"><i class="fa-regular fa-heart"></i></a>
+                <a type="button" class="btn btn-steamish">Acheter</a>
+            </div>
         </div>
     </div>
-
-    <div class="d-flex justify-content-around my-3">
-        <div class="col-12 col-lg-6 bg-greyo">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 bg-greyo my-3">
             <h4>À propos du jeu</h4>
             <p>{{ myGame.description }}</p>
         </div>
 
-        <div class="col-12 col-lg-5 bg-greyo">
+        <div class="col-lg-6 col-md-6 bg-greyo my-3">
             <p><b>Langue(s): </b>Test</p>
             <p><b>Editeur(s): </b>Test</p>
             <p><b>Date de sortie: </b>{{ myGame.publishedAt|date("d M y") }}</p>

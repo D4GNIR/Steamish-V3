@@ -1,38 +1,46 @@
 .card-game {
-    text-align: center;
+  text-align: center;
   
-    .container-image {
-      height: 320px;
-      position: relative;
+  .container-image {
+    height: 320px;
+    position: relative;
 
-      &:hover {
-        transition: ease, 0.20s;
-        cursor: pointer;
-        transform: scale(1.04);
-      }
-  
-      > img {
-        height: 97%;
-        width: 97%;
-        border-radius: 15px;
-      }
-  
-      .container-price {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 0.2em 0.4em;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 1.2em;
-        color: $whiteIG;
-        background-color: $orangeIG;
-      }
+    &:hover {
+      transition: ease, 0.20s;
+      cursor: pointer;
+      transform: scale(1.04);
     }
-  
-    .game-title {
-      font-size: 1em;
-      font-weight: 500;
+
+    > img {
+      height: 97%;
+      width: 97%;
+      border-radius: 15px;
+    }
+
+    .container-price {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0.2em 0.4em;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.2em;
       color: $whiteIG;
+      background-color: $orangeIG;
     }
   }
+  
+  .game-title {
+    font-size: 1em;
+    font-weight: 500;
+    color: $whiteIG;
+  }
+}
+
+.container-cover{
+  width: 300px;
+}
+
+.container-logo{
+  width: 300px;
+}
