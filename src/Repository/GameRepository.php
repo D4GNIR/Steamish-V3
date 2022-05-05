@@ -91,4 +91,23 @@ class GameRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    // Fonction pour récupérer tous les jeux d'un genre en particulier
+    public function getGamesOfOneGenre(Game $game) {
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->join('g.genres', 'genres')
+            ->where('genres IN (:genres)')
+            ->setParameter('genres', $game->getGenres())
+            ->andWhere('g != :currentGame')
+            ->setParameter('currentGame', $game)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    // Fonction pour récupérer tous les jeux d'une langue en particulier
+    public function getGamesOfOneLanguage() {
+        
+    }
 }
