@@ -17,7 +17,7 @@
         <p>
             Le {{ comment.createdAt|date("m/d/Y") }}
             <span class="{% if currentAccount is defined %}d-none{% endif %}"> par 
-                <a class="text-decoration-none linktwo" href="{{ path('accountSlug', {'slug': comment.account.name}) }}">{{ comment.account.name }}</a>
+                <a class="text-decoration-none linktwo" href="{{ path('accountSlug', {'slug': comment.account.slug}) }}">{{ comment.account.name }}</a>
             <span>
         </p>
     </div>
