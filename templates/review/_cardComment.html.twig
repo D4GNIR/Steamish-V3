@@ -1,5 +1,5 @@
 <div class="card-body comment" style="height:200px;">
-    <a class="text-decoration-none linktwo" href="{{ path('commentGameSlug', {'slug': comment.game.slug}) }}">
+    <a class="text-decoration-none linktwo {% if currentGame is defined %}d-none{% endif %}" href="{{ path('commentGameSlug', {'slug': comment.game.slug}) }}">
         {{ comment.game.name }}
     </a>
     <p class="card-text text-truncate">{{ comment.content }}</p>

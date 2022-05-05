@@ -1,5 +1,5 @@
 
-<a class="text-decoration-none {% if currentGame is defined %}d-none{% endif %}" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
+<a class="text-decoration-none" href="{{ path('gameSlug', {'slug': myGame.slug}) }}">
     <div class="container-image">
         <img src="{{ myGame.thumbnailCover }}" alt="...">
         <div class="container-price {% if hiddenPrice is defined %}d-none{% endif %}"> 
