@@ -25,8 +25,11 @@ class GameController extends AbstractController
     #[Route('/jeu/{slug}', name: 'gameSlug')]
     public function getOneGameByName(string $slug): Response
     {
+        $myGame = $this->gameRepository->getALotOfThings($slug);
+
         return $this->render('game/show.html.twig', [
-            'myGame' => $this->gameRepository->getALotOfThings($slug),
+            'myGame' => $myGame,
+            'myOthersGames' => $this->gameRepository->getRelatedGames($myGame)
         ]);
     }
 }

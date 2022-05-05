@@ -130,7 +130,7 @@ class Library
      *
      * @return string
      */
-    public function getTimeConverter(): string {
+    public function getTimeConverter(): string { // Si j'appelle cette fonction en twig, ne pas écr le get car il est implicite
         $hours = floor($this->gameTime / 3600);
         $minutes = ($this->gameTime % 60);
         if ($minutes < 10) {

@@ -75,5 +75,15 @@
             </div>
         {% endfor %}
     </div>
+
+    <div class="row">
+        <h4>Dans le même genre</h4>
+
+        {% for otherGame in myOthersGames %}
+            <div class="card-game col-12 col-md-4 col-lg-3">
+                    {% include "game/_card.html.twig" %}
+                </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
