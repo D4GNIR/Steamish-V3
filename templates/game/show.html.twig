@@ -38,7 +38,9 @@
                 <img src="{{ country.urlFlag }}" class="" alt="">
             {% endfor %}
 
-            <p>{{ myGame.publisher.name }}</p>
+            {% if myGame.publisher.name is defined %}
+                <p>{{ myGame.publisher.name }}</p>
+            {% endif %}
 
             {% for genre in myGame.genres %}
                 <p>{{ genre.name }}</p>
