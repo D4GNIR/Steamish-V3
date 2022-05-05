@@ -22,4 +22,13 @@ class HomeController extends AbstractController
             'mostBoughtGames' => $gameRepository->getMostGameByOrderBy('COUNT(lib.game)'),
         ]);
     }
+
+        // Récupérer un jeu avec son slug
+        #[Route('/jeu/{slug}', name: 'commentGameSlug')]
+        public function getOneGameByName(string $slug): Response
+        {
+            return $this->render('game/show.html.twig', [
+                'myGame' => $this->gameRepository->findOneBy([' comment.game.slug' => $slug])
+            ]);
+        }
 }

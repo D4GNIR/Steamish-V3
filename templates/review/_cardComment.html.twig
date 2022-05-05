@@ -1,6 +1,6 @@
 <div class="card-body comment" style="height:200px;">
     {# <h5 class="card-title">{{ comment.game.name }}</h5> #}
-    <a class="text-decoration-none" href="{{ path('gameSlug', {'slug': comment.game.name}) }}">{{ comment.game.name }}</a>
+    <a class="text-decoration-none linktwo" href="{{ path('commentGameSlug', {'slug': comment.game.slug}) }}">{{ comment.game.name }}</a>
     <p class="card-text text-truncate">{{ comment.content }}</p>
     <div class="row">
         <p class="card-text col-6"><i class="fa-solid fa-thumbs-up green"></i> <strong>{{ comment.upVotes }}</strong></p>
