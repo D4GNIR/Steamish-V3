@@ -38,11 +38,15 @@
 }
 
 .container-cover{
-  width: 300px;
+  height: 200px;
+  width: 50%;
+  object-fit: cover;
 }
 
 .container-logo{
   width: 300px;
+}
+
 .comment{
   background-color: $orangeIG;
   border-radius: 1em;

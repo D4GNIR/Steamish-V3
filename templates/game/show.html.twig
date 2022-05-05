@@ -31,8 +31,19 @@
             <p>{{ myGame.description }}</p>
         </div>
 
+        {{ dump(myGame) }}
+
         <div class="col-lg-6 col-md-6 bg-greyo my-3">
-            <p><b>Langue(s): </b>Test</p>
+            {% for country in myGame.countries %}
+                <img src="{{ country.urlFlag }}" class="" alt="">
+            {% endfor %}
+
+            <p>{{ myGame.publisher.name }}</p>
+
+            {% for genre in myGame.genres %}
+                <p>{{ genre.name }}</p>
+            {% endfor %}
+
             <p><b>Editeur(s): </b>Test</p>
             <p><b>Date de sortie: </b>{{ myGame.publishedAt|date("d M y") }}</p>
             <p><b>Genre(s): </b>Test</p>

@@ -21,18 +21,9 @@ class GameController extends AbstractController
         ]);
     }
 
-    // Récupérer un jeu avec son ID
-    // #[Route('/jeu/{id}', name: 'gameId')]
-    // public function getOneGameById($id): Response
-    // {
-    //     return $this->render('game/game.html.twig', [
-    //         'myGame' => $this->gameRepository->find($id)
-    //     ]);
-    // }
-
     // Récupérer un jeu avec son slug
     #[Route('/jeu/{slug}', name: 'gameSlug')]
-    public function getOneGameByName(string $slug): Response
+    public function getOneGameByName(string $slug, GameRepository $gameRepository): Response
     {
         return $this->render('game/show.html.twig', [
             'myGame' => $this->gameRepository->findOneBy(['slug' => $slug])
