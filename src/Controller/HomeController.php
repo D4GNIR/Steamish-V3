@@ -67,7 +67,9 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-                /** @var Account $account */
+                /** @var Account $account */                
+                $account->setSlug((new Slugify())->slugify($account->getName()));
+                
                 $em->flush();
                 return $this->redirectToRoute('app_home');
             }
