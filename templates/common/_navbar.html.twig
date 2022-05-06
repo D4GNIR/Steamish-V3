@@ -29,15 +29,14 @@
           </ul>
         </div>
       </div>
-      <div>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-          <button class="btn btn-orange" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-        <div>
-          <a href="{{ path('inscription') }}" class="btn btn-steamish mt-3">Inscription</a>
-        <div>
-      <div>
+        <div class='col-3'>
+            {{ 
+              render(controller('App\\Controller\\HomeController::searchBar')) 
+            }}
+          <div>
+            <a href="{{ path('inscription') }}" class="btn btn-steamish mt-3">Inscription</a>
+          </div>
+        </div>
     </div>
   </div>
 </nav>

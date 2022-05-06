@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountType;
+use App\Form\SearchBarType;
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use DateTime;
@@ -18,7 +19,8 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(
-        GameRepository $gameRepository, CommentRepository $commentRepository
+        GameRepository $gameRepository, 
+        CommentRepository $commentRepository,
     ): Response
     {
         return $this->render('home/index.html.twig', [
@@ -76,6 +78,23 @@ class HomeController extends AbstractController
 
         return $this->render('common/_modify.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/searchBar', name: 'search_bar')]
+    public function searchBar(Request $request): Response {
+        $formSearch = $this->createForm(SearchBarType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $value=$formSearch->getData()['search_value'];
+            if($value === null){
+                return $this->redirectToRoute('app_publisher');
+            }
+        }
+
+        return $this->render('common/_searchbar.html.twig', [
+            'formSearch' => $formSearch->createView(),
         ]);
     }
 }
