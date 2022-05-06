@@ -8,12 +8,14 @@
     <div class="row">
         <div class="col-6">
             <h1>{{ myAccount.name }}</h1>
-            <p>Membre depuis {{ myAccount.createdAt|date("d/m/Y") }}</p>
-            <p>Temps de jeu total : {{ myAccount.totalGameTime }}</p>
         </div>
         <div class="col-6 d-flex flex-row-reverse">
-            <a href="#" class="btn btn-steamish mt-3"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{{ path('modification', {'slug': myAccount.slug}) }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-pen-to-square"></i></a>
         </div>
+    </div>
+    <div class="row">
+        <p>Membre depuis {{ myAccount.createdAt|date("d/m/Y") }}</p>
+        <p>Temps de jeu total : {{ myAccount.totalGameTime }}</p>
     </div>
     <div>
         <h2 class="m-3" id="best">Les jeux de {{ myAccount.name }}</h2>

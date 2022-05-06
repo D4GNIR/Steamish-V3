@@ -42,6 +42,7 @@ class HomeController extends AbstractController
     {
         $form = $this->createForm(AccountType::class, new Account());
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
                 /** @var Account $account */
                 $account = $form->getData();
@@ -53,6 +54,23 @@ class HomeController extends AbstractController
             }
 
         return $this->render('common/_connect.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/modifier/{slug}', name: 'modification')]
+    public function edit(Account $account, Request $request, EntityManagerInterface $em):Response
+    {
+        $form = $this->createForm(AccountType::class, $account);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+                /** @var Account $account */
+                $em->flush();
+                return $this->redirectToRoute('app_home');
+            }
+
+        return $this->render('common/_modify.html.twig', [
             'form' => $form->createView(),
         ]);
     }

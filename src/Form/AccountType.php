@@ -17,22 +17,22 @@ class AccountType extends AbstractType
             ->add('name',TextType::class, [
                 'label' =>'Nom',
                 'attr' => [
-                'placeholder' => 'Nom',
+                    'placeholder' => 'Nom',
                 ]])
             ->add('email',TextType::class, [
                 'label' =>'E-mail',
                 'attr' => [
-                'placeholder' => 'E-mail',
+                    'placeholder' => 'E-mail',
                 ]])
             ->add('nickname',TextType::class, [
                 'label' =>'Pseudo',
                 'attr' => [
-                'placeholder' => 'Pseudo',
+                    'placeholder' => 'Pseudo',
                 ]])
             ->add('slug',TextType::class, [
                 'label' =>'Slug',
                 'attr' => [
-                'placeholder' => 'Slug',
+                    'placeholder' => 'Slug',
                 ]])
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre',
