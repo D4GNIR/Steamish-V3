@@ -10,7 +10,7 @@
                 <img src="{{ myGame.thumbnailCover }}" class="img-fluid container-cover d-flex mx-auto" alt="{{ myGame.slug }}">
             {% endif %}
         </div>
-        <div class="col-lg-6 col-md-6 bg-greyo my-3 fs-1">
+        <div class="col-lg-6 col-md-6 bg-greyo mt-5 my-3 fs-1">
             <div class="container">
                 <div class="d-flex align-items-center justify-content-center">
                     {% if myGame.thumbnailLogo is not null %}
@@ -45,7 +45,9 @@
 
             <p><b>Langue(s): </b>
                 {% for country in myGame.countries %}
-                    <img src="{{ country.urlFlag }}" class="" alt="">
+                    {# <a href="{{ path('gamesLanguage') }}"> #}
+                        <img src="{{ country.urlFlag }}" class="" alt="">
+                    {# </a> #}
                 {% endfor %}
             </p>
 
@@ -57,7 +59,9 @@
 
             <p><b>Genre(s): </b>
                 {% for genre in myGame.genres %}
-                    <a type="button" class="btn btn-steamish">{{ genre.name }}</a>
+                    {# <a type="button" href="{{ path('gamesGenre') }}" class="btn btn-steamish"> #}
+                        { genre.name }}
+                    {# </a> #}
                 {% endfor %}
             </p>
 
