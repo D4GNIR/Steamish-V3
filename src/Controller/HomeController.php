@@ -82,14 +82,24 @@ class HomeController extends AbstractController
     }
 
     #[Route('/searchBar', name: 'search_bar')]
-    public function searchBar(Request $request): Response {
+    public function searchBar(Request $request, GameRepository $gameRepository): Response {
         $formSearch = $this->createForm(SearchBarType::class);
         $formSearch->handleRequest($request);
 
         if ($formSearch->isSubmitted() && $formSearch->isValid()) {
             $value=$formSearch->getData()['search_value'];
             if($value === null){
-                return $this->redirectToRoute('app_publisher');
+                return $this->redirectToRoute('games');
+            }
+            $value = $gameRepository->searchGame($value);
+            if(count($value) === 1){
+                return $this->redirectToRoute('gameSlug',[
+                    'slug' => $value[0]->getSlug()
+                ]);
+            }elseif(count($value) > 1){
+                return $this->render('game/index.html.twig', [
+                    'gameEntities' => $value
+                ]);
             }
         }
 

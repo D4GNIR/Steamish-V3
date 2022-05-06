@@ -108,4 +108,14 @@ class GameRepository extends ServiceEntityRepository
     public function getGamesOfOneLanguage() {
         
     }
+
+    public function searchGame(string $value) {
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->where('g.name LIKE :value')
+            ->setParameter('value', '%'.$value.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
