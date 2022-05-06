@@ -26,7 +26,8 @@ class PublisherController extends AbstractController
     public function show(string $slug): Response
     {
         return $this->render('publisher/show.html.twig', [
-            'publisher' => $this->publisherRepository->getPublisherBySlug($slug)
+            'publisher' => $this->publisherRepository->findPublisher($slug)
         ]);
     }
+
 }

@@ -18,7 +18,9 @@
                 <img src="{{ publisher.country.urlFlag }}">
             </td>
             <td class="col-lg-4">
+                <a class="text-decoration-none link" href="{{ path('app_publisher_show', {'slug': publisher.slug}) }}">
                 {{ publisher.name }}
+                </a>
             </td>
             <td class="col-lg-4">
                <a href="{{ publisher.website }}" target="_blank" class="link"> {{ publisher.website }}</a>
