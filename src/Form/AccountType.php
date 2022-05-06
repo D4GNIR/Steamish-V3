@@ -29,11 +29,6 @@ class AccountType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Pseudo',
                 ]])
-            ->add('slug',TextType::class, [
-                'label' =>'Slug',
-                'attr' => [
-                    'placeholder' => 'Slug',
-                ]])
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre',
                 'attr' => [

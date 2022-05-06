@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Cocur\Slugify\Slugify;
 
 class HomeController extends AbstractController
 {
@@ -44,14 +45,15 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                /** @var Account $account */
-                $account = $form->getData();
-                $account->setCreatedAt(new DateTime('now'));
-                $account->setWallet(0);
-                $em->persist($form->getData());
-                $em->flush();
-                return $this->redirectToRoute('app_home');
-            }
+            /** @var Account $account */
+            $account = $form->getData();
+            $account->setCreatedAt(new DateTime('now'));
+            $account->setSlug((new Slugify())->slugify($account->getName()));            
+            
+            $em->persist($account);
+            $em->flush();
+            return $this->redirectToRoute('app_home');
+        }
 
         return $this->render('common/_connect.html.twig', [
             'form' => $form->createView(),
