@@ -59,9 +59,9 @@
 
             <p><b>Genre(s): </b>
                 {% for genre in myGame.genres %}
-                    {# <a type="button" href="{{ path('gamesGenre') }}" class="btn btn-steamish"> #}
-                        { genre.name }}
-                    {# </a> #}
+                    <a type="button" href="{{ path('gamesGenre', {'slug': genre.slug}) }}" class="btn btn-steamish">
+                        {{ genre.name }}
+                    </a>
                 {% endfor %}
             </p>
 

@@ -33,18 +33,18 @@ class GameController extends AbstractController
         ]);
     }
 
-    // // Afficher une page qui contient tous les jeux d'un genre en particulier
-    // #[Route('/jeux/genre/{slug}', name: 'gamesGenre')]
-    // public function getGamesFromOneGenre(string $slug)
-    // {
-    //     return $this->render('game/genre.html.twig', [
-    //         'myGame' => $this->gameRepository->getALotOfThings($slug)
-    //     ]);
-    // }
+    // Afficher une page qui contient tous les jeux d'un genre en particulier
+    #[Route('/jeux/genre/{slug}', name: 'gamesGenre')]
+    public function getGamesFromOneGenre(string $slug)
+    {
+        return $this->render('game/genre.html.twig', [
+            'genreGames' => $this->gameRepository->getGamesOfOneGenre($slug)
+        ]);
+    }
 
     // // Afficher une page qui contient tous les jeux avec une langue en particulier
     // #[Route('/jeux/langue/{slug}', name: 'gamesLanguage')]
-    // public function getGamesFromOneLanguage(string $slug)
+    // public function getGamesOfOneLanguage(string $slug)
     // {
     //     return $this->render('game/language.html.twig', [
     //         'myGame' => $this->gameRepository->getALotOfThings($slug)
