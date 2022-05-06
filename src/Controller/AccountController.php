@@ -23,7 +23,7 @@ class AccountController extends AbstractController
     public function getAllAccounts()
     {
         return $this->render('account/index.html.twig', [
-            'accountEntities' => $this->accountRepository->findAll()
+            'accountEntities' => $this->accountRepository->findBy([], ['createdAt' => 'DESC'])
         ]);
     }
 }
