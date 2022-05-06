@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Account;
+use App\Form\AccountType;
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,6 +34,26 @@ class HomeController extends AbstractController
     {
         return $this->render('game/show.html.twig', [
             'myGame' => $this->gameRepository->findOneBy([' comment.game.slug' => $slug])
+        ]);
+    }
+
+    #[Route('/inscription', name: 'inscription')]
+    public function connect(Request $request, EntityManagerInterface $em):Response
+    {
+        $form = $this->createForm(AccountType::class, new Account());
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+                /** @var Account $account */
+                $account = $form->getData();
+                $account->setCreatedAt(new DateTime('now'));
+                $account->setWallet(0);
+                $em->persist($form->getData());
+                $em->flush();
+                return $this->redirectToRoute('app_home');
+            }
+
+        return $this->render('common/_connect.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
