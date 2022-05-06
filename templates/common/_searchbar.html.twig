@@ -1,0 +1,12 @@
+{{ form_start(formSearch) }}
+    <div class="row">
+        <div class="col-8">
+            {{ form_widget(formSearch.search_value) }}
+        </div>
+        <div class="col-1">
+            <button class="btn btn-steamish" type="submit">
+                <i class="fa-solid fa-magnifying-glass text-white-50"></i>
+            </button>
+        </div>
+    </div>
+{{ form_end(formSearch) }}
