@@ -53,7 +53,9 @@
 
             <p><b>Editeur(s): </b>
                 {% if myGame.publisher.name is defined %}                
-                    <a type="button" class="btn btn-steamish">{{ myGame.publisher.name }}</a>
+                    <a type="button" class="btn btn-steamish" href="{{ path('app_publisher_show', {'slug': myGame.publisher.slug}) }}">
+                        {{ myGame.publisher.name }}
+                    </a>
                 {% endif %}
             </p>
 

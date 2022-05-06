@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\GameRepository;
+use App\Repository\GenreRepository;
+use App\Repository\PublisherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,7 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameController extends AbstractController
 {
     // Constructeur
-    public function __construct(private GameRepository $gameRepository) { }
+    public function __construct(
+        private GameRepository $gameRepository
+    ) { }
 
     // Récupérer tous les jeux
     #[Route('/jeux', name: 'games')]
@@ -29,16 +33,18 @@ class GameController extends AbstractController
 
         return $this->render('game/show.html.twig', [
             'myGame' => $myGame,
-            'myOthersGames' => $this->gameRepository->getRelatedGames($myGame)
+            'myOthersGames' => $this->gameRepository->getRelatedGames($myGame),
         ]);
     }
 
     // Afficher une page qui contient tous les jeux d'un genre en particulier
     #[Route('/jeux/genre/{slug}', name: 'gamesGenre')]
-    public function getGamesFromOneGenre(string $slug)
+    public function getGamesFromOneGenre(string $slug, GenreRepository $genreRepository)
     {
+        $genre = $genreRepository->findOneBy(['slug' => $slug]);
         return $this->render('game/genre.html.twig', [
-            'genreGames' => $this->gameRepository->getGamesOfOneGenre($slug)
+            'genreGames' => $this->gameRepository->getGamesOfOneGenre($slug),
+            'genre' => $genre
         ]);
     }
 
