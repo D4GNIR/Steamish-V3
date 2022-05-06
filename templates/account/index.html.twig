@@ -1,49 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}Tous les comptes{% endblock %}
 
 {% block body %}
 
 <div class="container">
-    <h1>{{ myAccount.name }}</h1>
-    <p>Membre depuis {{ myAccount.createdAt|date("m/d/Y") }}</p>
-    <p>Temps de jeu total {{ myAccount.totalGameTime }}</p>
-    <div>
-        <h2 class="m-3" id="best">Les jeux de {{ myAccount.name }}</h2>
-        <div class="container my-3">
-            <div class="row">
-                {% for library in myAccount.libraries %}
-                <div class="card-game col-12 col-md-6 col-lg-4">
-                    {% include "game/_card.html.twig" with 
-                        {
-                            'myGame': library.game,
-                            'hiddenPrice': true
-                        }
-                     %}
-                     <div class="row">
-                        <p class="{% if library.installed is empty %}red{% else %}green{% endif %}"><i class="fa-brands fa-instalod"></i></p>
-                        <p class="col-6">Dernière partie : {{ library.lastUsedAt|date("m/d/Y") }}</p>
-                        <p class="col-6">Temps de jeu : {{ library.timeConverter }}</p>
-                     </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <h2 class="m-3" id="best">Les commentaires de {{ myAccount.name }}</h2>
-        <div class="container my-3">
-            <div class="row">
-                {% for comment in myAccount.comments %}
-                <div class="card-game col-12 col-md-6 col-lg-4 my-3">
-                    {% include "review/_cardComment.html.twig" with 
-                        {
-                            'currentAccount': true,
-                        }
-                     %}
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    <table class="table table-hover text-light table-dark">
+        <tr class="row">
+            <td class="col-lg-3"><b>Nom</b></td>
+            <td class="col-lg-3"><b>Email</b></td>
+            <td class="col-lg-3"><b>Pseudo</b></td>
+            <td class="col-lg-3"><b>Dates de création</b></td>
+        </tr>
+        
+        {% for account in accountEntities %}
+        <tr class="row">
+            <td class="col-lg-3">
+                <a class="text-decoration-none link" href="{{ path('accountSlug', {'slug': account.slug}) }}">
+                    {{ account.name }}
+                </a>
+            </td>
+            <td class="col-lg-3">
+                {{ account.email }}
+            </td>
+            <td class="col-lg-3">
+               {{ account.nickname }}</a>
+            </td>
+            <td class="col-lg-3">
+               {{ account.createdAt|date("d/m/Y") }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
+
 {% endblock %}

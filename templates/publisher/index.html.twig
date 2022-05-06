@@ -3,15 +3,16 @@
 {% block title %}Les éditeurs{% endblock %}
 
 {% block body %}
+
 <div class="container">
     <table class="table table-hover text-light table-dark">
-
         <tr class="row">
-            <td class="col-lg-1">Drapeau</td>
-            <td class="col-lg-4">Nom</td>
-            <td class="col-lg-4">Site Web</td>
-            <td class="col-lg-3">Nombre de jeux</td>
+            <td class="col-lg-1"><b>Drapeau</b></td>
+            <td class="col-lg-4"><b>Nom</b></td>
+            <td class="col-lg-4"><b>Site Web</b></td>
+            <td class="col-lg-3"><b>Nombre de jeux</b></td>
         </tr>
+        
         {% for publisher in publishers %}
         <tr class="row">
             <td class="col-lg-1">
@@ -19,7 +20,7 @@
             </td>
             <td class="col-lg-4">
                 <a class="text-decoration-none link" href="{{ path('app_publisher_show', {'slug': publisher.slug}) }}">
-                {{ publisher.name }}
+                    {{ publisher.name }}
                 </a>
             </td>
             <td class="col-lg-4">
@@ -30,10 +31,7 @@
             </td>
         </tr>
         {% endfor %}
-
     </table>
 </div>
-
-
 
 {% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte de {{ myAccount.name }}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1>{{ myAccount.name }}</h1>
+            <p>Membre depuis {{ myAccount.createdAt|date("d/m/Y") }}</p>
+            <p>Temps de jeu total : {{ myAccount.totalGameTime }}</p>
+        </div>
+        <div class="col-6 d-flex flex-row-reverse">
+            <a href="#" class="btn btn-steamish mt-3"><i class="fa-solid fa-pen-to-square"></i></a>
+        </div>
+    </div>
+    <div>
+        <h2 class="m-3" id="best">Les jeux de {{ myAccount.name }}</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for library in myAccount.libraries %}
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    {% include "game/_card.html.twig" with 
+                        {
+                            'myGame': library.game,
+                            'hiddenPrice': true
+                        }
+                     %}
+                     <div class="row">
+                        <p class="{% if library.installed is empty %}red{% else %}green{% endif %}"><i class="fa-brands fa-instalod"></i></p>
+                        <p class="col-6">Dernière partie : {{ library.lastUsedAt|date("m/d/Y") }}</p>
+                        <p class="col-6">Temps de jeu : {{ library.timeConverter }}</p>
+                     </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <h2 class="m-3" id="best">Les commentaires de {{ myAccount.name }}</h2>
+        <div class="container my-3">
+            <div class="row">
+                {% for comment in myAccount.comments %}
+                <div class="card-game col-12 col-md-6 col-lg-4 my-3">
+                    {% include "review/_cardComment.html.twig" with 
+                        {
+                            'currentAccount': true,
+                        }
+                     %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

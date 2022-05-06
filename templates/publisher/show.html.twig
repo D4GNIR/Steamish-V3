@@ -3,17 +3,19 @@
 {% block title %}{{ publisher.name }}{% endblock %}
 
 {% block body %}
+
 <div class="container">
     <h2>Tous les jeux de {{ publisher.name }}</h2>
-        <div class="container my-3">
-            <div class="row">
-                {% for myGame in publisher.games %}
-                <div class="card-game col-12 col-md-6 col-lg-4">
-                    {% include "game/_card.html.twig" %}
-                </div>
-                {% endfor %}
+
+    <div class="container my-3">
+        <div class="row">
+            {% for myGame in publisher.games %}
+            <div class="card-game col-12 col-md-6 col-lg-4">
+                {% include "game/_card.html.twig" %}
             </div>
+            {% endfor %}
         </div>
+    </div>
 </div>
 
 {% endblock %}
