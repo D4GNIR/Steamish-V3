@@ -1,0 +1,17 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+
+        {{ form_row(form.website) }}
+
+        {{ form_row(form.slug) }}
+
+        {{ form_row(form.country) }}
+
+        <button type="submit" class="btn btn-primary">Valider</button>
+    {{ form_end(form) }}
+{% endblock %}

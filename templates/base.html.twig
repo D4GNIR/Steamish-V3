@@ -12,19 +12,8 @@
         {% endblock %}
     </head>
     <body class="common">
-        <header>
-            {% block header %}
-                <div style="height: 110px;">
-                </div>
-                {% include 'common/_navbar.html.twig' %}
-            {% endblock %}
-        </header>
-        {% block body %}
+        {% block content %}
+
         {% endblock %}
-        <footer>
-            {% block footer %}
-                {% include 'common/_footer.html.twig' %}
-            {% endblock %}
-        </footer>
     </body>
 </html>
