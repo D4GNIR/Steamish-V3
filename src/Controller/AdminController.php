@@ -17,7 +17,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/dashboard/genre', name: 'app_adminGenre')]
+    #[Route('/admin/genres_liste', name: 'app_adminGenre')]
     public function indexGenre(GenreRepository $genreRepository): Response
     {
         $genre = $genreRepository->findAll();
@@ -26,7 +26,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/dashboard/genre/show/{slug}', name: 'app_genre_show')]
+    #[Route('/admin/genres/show/{slug}', name: 'app_genre_show')]
     public function showGenre(GenreRepository $genreRepository): Response
     {
         $genre = $genreRepository->findAll();
@@ -35,7 +35,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/dashboard/genre/edit/{slug}', name: 'app_genre_edit')]
+    #[Route('/admin/genres/edit/{slug}', name: 'app_genre_edit')]
     public function editGenre(GenreRepository $genreRepository): Response
     {
         $genre = $genreRepository->findAll();
@@ -44,7 +44,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/dashboard/genre/delete/{slug}', name: 'app_genre_delete')]
+    #[Route('/admin/genres/delete/{slug}', name: 'app_genre_delete')]
     public function deleteGenre(GenreRepository $genreRepository): Response
     {
         $genre = $genreRepository->findAll();
