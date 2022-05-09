@@ -74,6 +74,14 @@
     <div class="row">
         <h4>Tests des joueurs</h4>
 
+        <div>
+        {% if app.user %}
+            
+        {% else %}
+                          
+        {% endif %}
+        </div>
+
         {% for comment in myGame.comments|slice(0, 6) %}
             <div class="col-4 mb-3">
                 {% include "review/_cardComment.html.twig" with

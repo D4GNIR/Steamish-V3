@@ -33,6 +33,9 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private Game $game;
 
+    #[ORM\Column(type: 'integer')]
+    private $note;
+
     public function __construct()
     {
         $this->downVotes = 0;
@@ -118,6 +121,18 @@ class Comment
     public function setCreatedAt(?DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
     }
 
 }

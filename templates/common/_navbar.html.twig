@@ -34,12 +34,17 @@
               render(controller('App\\Controller\\HomeController::searchBar')) 
             }}
           <div>
-            <a href="{{ path('inscription') }}" class="btn btn-steamish mt-3">Inscription</a>
           </div>
           <div>
-            <a href="{{ path('app_login') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-check"></i></a>
-            <a href="{{ path('app_logout') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-xmark"></i></a>
-            <a href="{{ path('app_admin') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-chart-pie"></i></a>
+            {% if app.user %}
+              <a href="{{ path('app_logout') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-xmark"></i></a>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <a href="{{ path('app_admin') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-chart-pie"></i></a>
+                {% endif %}
+            {% else %}
+              <a href="{{ path('inscription') }}" class="btn btn-steamish mt-3">Inscription</a>
+              <a href="{{ path('app_login') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-check"></i></a>                
+            {% endif %}            
           </div>
         </div>
     </div>

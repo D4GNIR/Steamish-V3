@@ -13,7 +13,8 @@ class GameController extends AbstractController
 {
     // Constructeur
     public function __construct(
-        private GameRepository $gameRepository
+        private GameRepository $gameRepository,
+
     ) { }
 
     // Récupérer tous les jeux
@@ -30,10 +31,13 @@ class GameController extends AbstractController
     public function getOneGameByName(string $slug): Response
     {
         $myGame = $this->gameRepository->getALotOfThings($slug);
+        $user = $this->getUser();
+        $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);        
 
         return $this->render('game/show.html.twig', [
             'myGame' => $myGame,
             'myOthersGames' => $this->gameRepository->getRelatedGames($myGame),
+            // 'comment' => $this->CommentRepository->getCommentsByAccountAndByGame($user, $gameEntity)
         ]);
     }
 
@@ -56,4 +60,6 @@ class GameController extends AbstractController
     //         'myGame' => $this->gameRepository->getALotOfThings($slug)
     //     ]);
     // }
+
+
 }

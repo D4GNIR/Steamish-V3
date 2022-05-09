@@ -32,4 +32,8 @@ class CommentRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    // public function getCommentsByAccountAndByGame() {
+
+    // }
 }
