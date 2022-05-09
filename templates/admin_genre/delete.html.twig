@@ -1,0 +1,18 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Supprimer {{ genre.name }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="content">
+        <div class="header">
+            <h5 class="title">Etes vous sur de supprimer</h5>
+        </div>
+        <div class="footer">
+            <a href="{{ path('app_genre_ok_delete', {'slug': genre.slug}) }}" type="button"
+                class="btn btn-danger">Oui</a>
+            <a href="{{ path('app_adminGenre') }}" type="button" class="btn btn-warning">Non</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
