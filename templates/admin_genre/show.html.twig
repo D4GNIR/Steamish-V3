@@ -1,0 +1,21 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}{{ genre.name }}{% endblock %}
+
+{% block body %}
+<div class='container'>
+    <h1 class="mt-3">{{ genre.name }}</h1>
+
+    <h2 class="mt-3">Tous les jeux du même genre</h2>
+    <div class="row mt-3">
+        {% for myGame in genreGames %}
+        <div class="card-game col-12 col-md-4 col-lg-3">
+            {% include "game/_card.html.twig" with
+        {
+            'hiddenPrice': true,
+        } %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
