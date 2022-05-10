@@ -2,10 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Form\AddCommentType;
+use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
+use Cocur\Slugify\Slugify;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,8 +21,11 @@ class GameController extends AbstractController
     // Constructeur
     public function __construct(
         private GameRepository $gameRepository,
-
-    ) { }
+        private CommentRepository $commentRepository
+    ) {
+        $this->gameRepository = $gameRepository;
+        $this->commentRepository = $commentRepository;
+    }
 
     // Récupérer tous les jeux
     #[Route('/jeux', name: 'games')]
@@ -26,18 +36,46 @@ class GameController extends AbstractController
         ]);
     }
 
+    #[Route('/jeu/commentaire', name: 'add_comment')]
+    public function addAComment(Request $request, EntityManagerInterface $em):Response
+    {
+        $commentForm = $this->createForm(AddCommentType::class, new Comment());
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            /** @var Comment $comment */
+            $comment = $commentForm->getData();
+            $comment->setCreatedAt(new DateTime('now'));          
+            
+            $em->persist($comment);
+            $em->flush();
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('common/_commentForm.html.twig', [
+            'commentForm' => $commentForm->createView(),
+        ]);
+    }
+
     // Récupérer un jeu détaillé avec son slug
     #[Route('/jeu/{slug}', name: 'gameSlug')]
     public function getOneGameByName(string $slug): Response
     {
         $myGame = $this->gameRepository->getALotOfThings($slug);
-        // $user = $this->getUser();
-        // $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);        
+        $user = $this->getUser();
+        $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);
+
+        dump($myGame);
+        dump($user);
+        dump($gameEntity);
+
+        $myOtherGames = $this->gameRepository->getRelatedGames($myGame);
+        $myComment = $this->commentRepository->getCommentByAccountAndByGame($user, $gameEntity);
 
         return $this->render('game/show.html.twig', [
             'myGame' => $myGame,
-            'myOthersGames' => $this->gameRepository->getRelatedGames($myGame),
-            // 'comment' => $this->CommentRepository->getCommentsByAccountAndByGame($user, $gameEntity)
+            'myOthersGames' => $myOtherGames,
+            'comment' => $myComment,
         ]);
     }
 
@@ -60,6 +98,4 @@ class GameController extends AbstractController
     //         'myGame' => $this->gameRepository->getALotOfThings($slug)
     //     ]);
     // }
-
-
 }
