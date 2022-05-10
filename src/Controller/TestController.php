@@ -33,9 +33,6 @@ class TestController extends AbstractController
     public function index(Request $request): Response
     {
 
-        $str = 'Le seigneur des anneaux';
-        $strSlug = $this->sluger->slug($str);
-        dump($strSlug);
         $qb = $this->accountRepository->getQbAll();
 
         $pagination = $this->paginator->paginate(

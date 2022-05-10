@@ -118,4 +118,10 @@ class GameRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    
+    public function getQbAll()
+    {
+        return $this->createQueryBuilder('g');
+    }
 }
