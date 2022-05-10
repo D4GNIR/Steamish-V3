@@ -1,4 +1,29 @@
-<div class="card-body comment" style="height:200px;">
+<div class="card" style="width: 18rem;">
+  <div class="card-body bg-dark">
+    <h5 class="card-title {% if currentGame is defined %}d-none{% endif %}">
+        <a href="{{ path('commentGameSlug', {'slug': comment.game.slug}) }}" class="linkthree">
+            {{ comment.game.name }}
+        </a>
+    </h5>
+    <p class="card-text text-truncate">{{ comment.content }}</p>
+    <p>
+        <i class="fa-solid fa-thumbs-up green"></i>
+        <strong>{{ comment.upVotes }}</strong>
+        <i class="fa-solid fa-thumbs-down red"></i>
+        <strong>{{ comment.downVotes }}</strong>
+    </p>
+    <p>
+        <span class="{% if currentAccount is defined %}d-none{% endif %}">
+        <a href="{{ path('accountSlug', {'slug': comment.account.slug}) }}" class="linkthree">
+        {{ comment.account.name }} - 
+        </a>
+        </span>
+        {{ comment.createdAt|date("d/m/Y") }}
+    </p>
+  </div>
+</div>
+
+{# <div class="card-body comment" style="height:200px;">
     <a class="text-decoration-none linktwo {% if currentGame is defined %}d-none{% endif %}" href="{{ path('commentGameSlug', {'slug': comment.game.slug}) }}">
         {{ comment.game.name }}
     </a>
@@ -15,10 +40,10 @@
     </div>
     <div class="row">
         <p>
-            Le {{ comment.createdAt|date("m/d/Y") }}
+            Le {{ comment.createdAt|date("d/m/Y") }}
             <span class="{% if currentAccount is defined %}d-none{% endif %}"> par 
                 <a class="text-decoration-none linktwo" href="{{ path('accountSlug', {'slug': comment.account.slug}) }}">{{ comment.account.name }}</a>
-            <span>
+            </span>
         </p>
     </div>
-</div>
+</div> #}

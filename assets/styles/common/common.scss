@@ -62,5 +62,11 @@ li{
         &:hover{
             cursor: pointer;
         }
+.linkthree{
+    text-decoration: none;
+    color: $whiteIG;
+
+    &:hover{
+        color: $orangeIG;
     }
 }

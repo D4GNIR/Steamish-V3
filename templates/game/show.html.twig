@@ -72,10 +72,11 @@
     </div>
 
     <div class="row">
-        {# Proposer de laisser un commentaire #}
+        {# Si l'utilisateur est connecté #}
         {% if app.user %}
+            {# S'il existe un commentaire lié au compte ET au jeu #}
             {% if comment %}
-                <p>Mon commentaire:</p>                
+                <p>Mon commentaire:</p>
                 <div class="col-4 mb-3">
                     {% include "review/_cardComment.html.twig" with
                         {
@@ -83,12 +84,26 @@
                         }
                     %}
                 </div>
+            {# S'il n'y a pas de commenaire #}
             {% else %}
-                <p>Rajouter un commentaire:</p> 
-                {% include 'common/_commentForm.html.twig' %}
+                {# Formulaire pour commenter #}
+                <p><b>Que pensez-vous de ce jeu?</b></p>
+                <div class="col-4">
+                    {{ form_start(commentForm) }}
+                    {{ form_end(commentForm) }}
+                </div>
             {% endif %}
+        {# Si l'utilisateur n'est pas connecté #}
         {% else %}
-            {{ path('inscription') }}
+            {# Bouton pour aller s'inscrire #}
+            <div>
+                <p>
+                    Connectez-vous pour laisser un commentaire
+                    <a href="{{ path('app_login') }}" class="btn btn-steamish mt-3">
+                        <i class="fa-solid fa-user-check"></i>
+                    </a>
+                </p>
+            </div>
         {% endif %}
 
         <h4>Tests des joueurs</h4>
