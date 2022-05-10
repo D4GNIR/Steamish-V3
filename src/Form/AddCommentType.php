@@ -8,6 +8,7 @@ use App\Entity\Game;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,22 +20,25 @@ class AddCommentType extends AbstractType
     {
         $builder
             ->add('content',TextareaType::class, [
-                'label' =>'Contenu',
+                'label' =>'Commentaire',
                 'attr' => [
                     'placeholder' => 'Je pense que ce jeu...',
                 ]])
             // ->add('upVotes')
             // ->add('downVotes')
             // ->add('createdAt')
-            // ->add('note', HiddenType::class)
-            ->add('account', EntityType::class, [
-                'class' => Account::class,
-                'choice_label' => 'name'
-            ])
-            ->add('game', EntityType::class, [
-                'class' => Game::class,
-                'choice_label' => 'name'
-            ])
+            ->add('note', IntegerType::class, [
+                'attr' => [
+                    'placeholder' => '2...',
+                ]])
+            // ->add('account', EntityType::class, [
+            //     'class' => Account::class,
+            //     'choice_label' => 'name'
+            // ])
+            // ->add('game', EntityType::class, [
+            //     'class' => Game::class,
+            //     'choice_label' => 'name'
+            // ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre',
                 'attr' => [

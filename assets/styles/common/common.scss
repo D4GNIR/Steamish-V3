@@ -38,3 +38,12 @@ li{
         color: $darkGreyIG;
     }
 }
+
+.linkthree{
+    text-decoration: none;
+    color: $whiteIG;
+
+    &:hover{
+        color: $orangeIG;
+    }
+}
