@@ -31,8 +31,8 @@ class GameController extends AbstractController
     public function getOneGameByName(string $slug): Response
     {
         $myGame = $this->gameRepository->getALotOfThings($slug);
-        $user = $this->getUser();
-        $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);        
+        // $user = $this->getUser();
+        // $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);        
 
         return $this->render('game/show.html.twig', [
             'myGame' => $myGame,
