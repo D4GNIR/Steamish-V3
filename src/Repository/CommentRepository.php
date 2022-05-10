@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Account;
 use App\Entity\Comment;
+use App\Entity\Game;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -33,7 +35,18 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    // public function getCommentsByAccountAndByGame() {
-
-    // }
+    public function getCommentByAccountAndByGame(Account $account, Game $game)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.account', 'account')
+            ->join('c.game', 'game')
+            ->where('account = :account_entity')
+            ->andWhere('game = :game_entity')
+            ->setParameter('account_entity', $account)
+            ->setParameter('game_entity', $game)
+            ->setMaxResults(1) // Je le force à me rendre un seul résultat
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

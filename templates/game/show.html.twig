@@ -72,15 +72,26 @@
     </div>
 
     <div class="row">
-        <h4>Tests des joueurs</h4>
-
-        <div>
+        {# Proposer de laisser un commentaire #}
         {% if app.user %}
-            
+            {% if comment %}
+                <p>Mon commentaire:</p>                
+                <div class="col-4 mb-3">
+                    {% include "review/_cardComment.html.twig" with
+                        {
+                            'currentGame': true,
+                        }
+                    %}
+                </div>
+            {% else %}
+                <p>Rajouter un commentaire:</p> 
+                {% include 'common/_commentForm.html.twig' %}
+            {% endif %}
         {% else %}
-                          
+            {{ path('inscription') }}
         {% endif %}
-        </div>
+
+        <h4>Tests des joueurs</h4>
 
         {% for comment in myGame.comments|slice(0, 6) %}
             <div class="col-4 mb-3">
