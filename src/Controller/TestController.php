@@ -10,24 +10,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TestController extends AbstractController
 {
     private AccountRepository $accountRepository;
     private PaginatorInterface $paginator;
+    private SluggerInterface $sluger;
 
         // Constructeur
         public function __construct(
             AccountRepository $accountRepository,
-            PaginatorInterface $paginator
+            PaginatorInterface $paginator,
+            SluggerInterface $sluger
         ) {
             $this->accountRepository = $accountRepository;
             $this->paginator = $paginator;
+            $this->sluger = $sluger;
          }
 
     #[Route('/test', name: 'app_test')]
     public function index(Request $request): Response
     {
+
+        $str = 'Le seigneur des anneaux';
+        $strSlug = $this->sluger->slug($str);
+        dump($strSlug);
         $qb = $this->accountRepository->getQbAll();
 
         $pagination = $this->paginator->paginate(
