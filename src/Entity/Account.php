@@ -50,11 +50,19 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     protected ?DateTime $createdAt;
 
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Topic::class)]
+    private $topics;
+
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Message::class)]
+    private $messages;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->wallet = 0.0;
+        $this->topics = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,5 +282,65 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Topic>
+     */
+    public function getTopics(): Collection
+    {
+        return $this->topics;
+    }
+
+    public function addTopic(Topic $topic): self
+    {
+        if (!$this->topics->contains($topic)) {
+            $this->topics[] = $topic;
+            $topic->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTopic(Topic $topic): self
+    {
+        if ($this->topics->removeElement($topic)) {
+            // set the owning side to null (unless already changed)
+            if ($topic->getCreatedBy() === $this) {
+                $topic->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getCreatedBy() === $this) {
+                $message->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
 }

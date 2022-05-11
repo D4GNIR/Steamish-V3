@@ -1,0 +1,18 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Créer un éditeur{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <a href="{{ path('app_adminPublisher')}}" class="btn btn-steamish p-1">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+    </a>
+    <div class="col-6">
+        {{ form_start(form) }}
+
+        {{ form_end(form) }}
+    </div>
+</div>
+
+{% endblock %}

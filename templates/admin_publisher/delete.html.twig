@@ -1,0 +1,24 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Supprimer{{ publisher.name }}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <a href="{{ path('app_adminPublisher')}}" class="btn btn-steamish p-1">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+    </a>
+    
+    <div class="content">
+        <div class="header">
+            <h5 class="title">Êtes-vous certain de vouloir supprimer ?</h5>
+        </div>
+        <div class="footer">
+            <a href="{{ path('app_publisher_ok_delete', {'slug': publisher.slug}) }}" type="button"
+                class="btn btn-danger">Oui</a>
+            <a href="{{ path('app_adminPublisher') }}" type="button" class="btn btn-warning">Non</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
