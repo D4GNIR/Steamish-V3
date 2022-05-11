@@ -40,7 +40,6 @@ li{
 }
 
 .pagination{
-
     font-size: 20px;
     color: $whiteIG;
     display: flex;
@@ -53,7 +52,6 @@ li{
         border-radius: 20%;
         padding: 0.3rem;
         background-color: $orangeIG;
-
     }
 
     a{
@@ -62,6 +60,9 @@ li{
         &:hover{
             cursor: pointer;
         }
+    }
+}
+
 .linkthree{
     text-decoration: none;
     color: $whiteIG;
