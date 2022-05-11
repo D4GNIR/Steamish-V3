@@ -1,2 +1,3 @@
-import '@popperjs/core';
 import 'bootstrap';
+
+console.log('fdjfdjs');
