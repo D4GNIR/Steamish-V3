@@ -39,7 +39,7 @@ class HashPasswordCommand extends Command
         $i = 0;
         $accountEntity = $this->accountRepository->findAll();
         foreach ($accountEntity as $account) {
-            $account->setPassword('$2y$13$7B2Dotb7hi61U4EoQHXh3eIzQVUV8bB2VksDwWha.Ms71e27pEKFa');
+            $account->setPassword('$2y$13$RFQuJsXcaSjdZxNI9iXCQebS8YwFQYLJaKaG7p6.g29zOk7EBIzii');
             $this->em->persist($account);
             $i++;
         }
