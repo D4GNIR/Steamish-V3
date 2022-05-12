@@ -71,3 +71,37 @@ li{
         color: $orangeIG;
     }
 }
+
+:root {
+    --opacity: 50%
+}
+
+.stars {
+    display: flex;
+}
+
+.stars.disabled {
+    pointer-events: none;
+}
+
+.stars a {
+    opacity: var(--opacity);
+    cursor: pointer;
+    padding: 3px;
+}
+
+.stars:hover a {
+    opacity: 100%;
+}
+
+.stars a:hover {
+    opacity: 100%;
+}
+
+.stars a:hover ~ a {
+    opacity: var(--opacity);
+}
+
+.stars a.active {
+    opacity: 100%;
+}
