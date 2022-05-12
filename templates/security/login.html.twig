@@ -11,7 +11,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            Vous etes déjà connecté{{ app.user.username }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
+            Vous êtes déjà connecté {{ app.user.username }}: <a href="{{ path('app_logout') }}">déconnexion</a>
         </div>
     {% endif %}
 

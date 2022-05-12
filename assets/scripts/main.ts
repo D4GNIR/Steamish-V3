@@ -1,3 +1,4 @@
 import 'bootstrap';
+import './module/star-rating.ts';
 
-console.log('fdjfdjs');
+// console.log('main.ts');

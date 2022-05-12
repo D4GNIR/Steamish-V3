@@ -73,7 +73,7 @@ class GameController extends AbstractController
             
             $em->persist($comment);
             $em->flush();
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('gameSlug', (['slug' => $slug]));
         }
         // FIN FORMULAIRE COMMENTAIRE
 

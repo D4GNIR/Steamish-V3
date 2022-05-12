@@ -90,6 +90,17 @@
                 <p><b>Que pensez-vous de ce jeu?</b></p>
                 <div class="col-4">
                     {{ form_start(commentForm) }}
+                        {{ form_row(commentForm.content) }}
+
+                        <div id="rating-system" class="stars">
+                            <a><i class="fa-solid fa-star" data-value="1"></i></a>
+                            <a><i class="fa-solid fa-star" data-value="2"></i></a>
+                            <a><i class="fa-solid fa-star" data-value="3"></i></a>
+                            <a><i class="fa-solid fa-star" data-value="4"></i></a>
+                            <a><i class="fa-solid fa-star" data-value="5"></i></a>
+                        </div>
+
+                        <button type="submit" class="btn btn-steamish my-3">Soumettre</button>
                     {{ form_end(commentForm) }}
                 </div>
             {% endif %}

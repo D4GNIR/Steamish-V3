@@ -12,8 +12,20 @@ class AccountController extends AbstractController
     public function __construct(private AccountRepository $accountRepository) { }
 
     #[Route('/compte/{slug}', name: 'accountSlug')]
-    public function getOneGameByName(string $slug): Response
+    public function getOneAccountBySlug(string $slug): Response
     {
+        if ($this->getUser()) {
+            /**@var Account $user */
+            $user = $this->getUser(); // Je récupère l'utilisateur
+            $userSlug = $user->getSlug(); // Je récupère le slug de l'utilisateur
+
+            if ($slug !== $userSlug) {
+                return $this->redirectToRoute('app_home');
+            }
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+
         return $this->render('account/show.html.twig', [
             'myAccount' => $this->accountRepository->findOneBy(['slug' => $slug])
         ]);

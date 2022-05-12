@@ -5,7 +5,10 @@
             {{ comment.game.name }}
         </a>
     </h5>
-    <p class="card-text text-truncate">{{ comment.content }}</p>
+    <div>
+        <p class="card-text text-truncate">{{ comment.content }}</p>
+        <p>{{ comment.note }}/5</p>
+    </div>
     <p>
         <i class="fa-solid fa-thumbs-up green"></i>
         <strong>{{ comment.upVotes }}</strong>

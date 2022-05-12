@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark common bg-darko fixed-top">
   <div class="container-fluid">
-    <a class="logo" href="{{ path('app_home') }}">Steamish</a>
+    <a class="logo" href="{{ path('app_home') }}">
+      <img src="/build/images/logo.png" class="img-fluid" width="100" height="100" alt="logo">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -38,6 +40,7 @@
           <div>
             {% if app.user %}
               <a href="{{ path('app_logout') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-xmark"></i></a>
+              <a href="{{ path('accountSlug', {'slug': app.user.slug}) }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-gear"></i></a>
                 {% if is_granted("ROLE_ADMIN") %}
                     <a href="{{ path('app_admin') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-chart-pie"></i></a>
                 {% endif %}

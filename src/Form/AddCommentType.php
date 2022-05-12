@@ -27,7 +27,7 @@ class AddCommentType extends AbstractType
             // ->add('upVotes')
             // ->add('downVotes')
             // ->add('createdAt')
-            ->add('note', IntegerType::class, [
+            ->add('note', HiddenType::class, [
                 'attr' => [
                     'placeholder' => '2...',
                 ]])
@@ -39,12 +39,12 @@ class AddCommentType extends AbstractType
             //     'class' => Game::class,
             //     'choice_label' => 'name'
             // ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Soumettre',
-                'attr' => [
-                    'class' => 'btn btn-steamish'
-            ]
-        ])
+        //     ->add('submit', SubmitType::class, [
+        //         'label' => 'Soumettre',
+        //         'attr' => [
+        //             'class' => 'btn btn-steamish'
+        //     ]
+        // ])
         ;
     }
 
