@@ -4,24 +4,28 @@
 
 {% block body %}
 <div class="container">
-    <a href="{{ path('app_forum_create') }}" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus">Ajouter un
-            forum</i></a>
+    {% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path('app_forum_create') }}" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus">
+            Ajouter un forum
+        </i>
+    </a>
+    {% endif %}
     <div class="row ">
         {% for forum in forumEntity %}
         <div class="col-5 bg-darko m-2 p-2">
             <div class="d-flex justify-content-between">
-                <h2 class="link"> {{ forum.title }} </h2>
+                <a class="link" href="{{ path('app_forum_show', {'id': forum.id}) }}">
+                    <h2> {{ forum.title }} </h2>
+                </a>
                 <p>{{ forum.createdAt|date("d/m/Y") }}</p>
             </div>
             <ul>
                 {% for topic in forum.topics %}
-                <li>{{ topic.title }}</li>
+                <li><a href="{{path('app_topic', {'idTopic': topic.id}) }}" class="link">{{ topic.title }}</a></li>
                 {% endfor %}
             </ul>
+            {% if is_granted("ROLE_ADMIN") %}
             <div>
-                <a class="btn btn-primary" href="{{ path('app_forum_show', {'id': forum.id}) }}">
-                    <i class="fa-solid fa-eye"></i>
-                </a>
                 <a class="btn btn-steamish" href="{{ path('app_forum_edit', {'id': forum.id}) }}">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
@@ -42,12 +46,15 @@
                             Etes vous sur de vouloir supprimer {{ forum.title }} ?
                         </div>
                         <div class="modal-footer bg-darko">
-                            <a type="button" class="btn btn-danger" href="{{ path('app_forum_delete', {'id': forum.id}) }}">Oui</a>
+                            <a type="button" class="btn btn-danger"
+                                href="{{ path('app_forum_delete', {'id': forum.id}) }}">Oui</a>
                             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Non</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
+
         </div>
         {% endfor %}
     </div>

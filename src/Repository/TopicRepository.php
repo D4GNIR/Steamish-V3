@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Forum;
 use App\Entity\Topic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -45,6 +46,16 @@ class TopicRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+    public function getTopicByForum(Forum $forum, $topic){
+        return $this->createQueryBuilder('t')
+        ->join('t.forum','f')
+        ->where('f = :forum')
+        ->andWhere('t.id = :topic')
+        ->setParameter('forum' , $forum)
+        ->setParameter('topic' , $topic)
+        ->getQuery()
+        ->getSingleResult();
     }
 
     // /**

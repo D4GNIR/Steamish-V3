@@ -3,7 +3,20 @@
 {% block title %}Hello TopicController!{% endblock %}
 
 {% block body %}
-<pre>
-    {{ dump(topic) }}
-</pre>
+<div class="container">
+    <h2>{{ topic.title }}</h2>
+    <p>{{ topic.createdAt|date("d/m/Y") }}</p>
+    {% for message in topic.messages %}
+    <div class="p-2 m-2">
+        <div class="d-flex justify-content-between bg-top p-2 rounded-top">
+            <p class="message-name">{{ message.createdBy.name }}</p>
+            <p class="message-name">{{ message.createdAt|date("m/d/Y") }}</p>
+        </div>
+        <p class="bg-bot p-2 rounded-bottom shadow ">{{ message.content }}</p>
+    </div>
+    {% endfor %}
+    <div class="">
+        {% include "topic/addMessage.html.twig" %}
+    </div>
+</div>
 {% endblock %}
