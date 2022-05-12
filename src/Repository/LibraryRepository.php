@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Account;
+use App\Entity\Game;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,5 +33,16 @@ class LibraryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function getLibraryByGame(Game $game){
+        return $this->createQueryBuilder('p')
+        ->join('p.game','g')
+        ->where('g = :game')
+        ->setParameter('game' , $game)
+        // ->where('g.id = :game_id')
+        // ->setParameter('game_id', $game->getId())
+        ->getQuery()
+        ->getResult();
     }
 }

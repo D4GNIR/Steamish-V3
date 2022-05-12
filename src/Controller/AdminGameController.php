@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Form\AddGameType;
 use App\Repository\GameRepository;
+use App\Repository\LibraryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,15 +19,18 @@ class AdminGameController extends AbstractController
     private GameRepository $gameRepository;
     private PaginatorInterface $paginator;
     private SluggerInterface $sluger;
+    private LibraryRepository $libraryRepository;
 
     public function __construct(
         GameRepository $gameRepository,
         PaginatorInterface $paginator,
-        SluggerInterface $sluger
+        SluggerInterface $sluger,
+        LibraryRepository $libraryRepository
     ) {
         $this->gameRepository = $gameRepository;
         $this->paginator = $paginator;
         $this->sluger = $sluger;
+        $this->libraryRepository = $libraryRepository;
      }
 
     #[Route('/admin/game_liste', name: 'app_admin_game')]
@@ -99,12 +103,21 @@ class AdminGameController extends AbstractController
     }
 
     #[Route('/admin/games/delete/{slug}', name: 'app_game_delete')]
-    public function deleteGame(Game $game, Request $request, EntityManagerInterface $em): Response
+    public function deleteGame($slug, Request $request, EntityManagerInterface $em): Response
     {
 
-            $em->remove($game);
-            $em->flush();
-            return $this->redirectToRoute('app_admin_game');
+        $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);
+        $librariesEntities = $this->libraryRepository->getLibraryByGame($gameEntity);
+
+        foreach ($librariesEntities as $library) {
+            $em->remove($library);
+        }
+        $em->flush();
+
+        
+        $em->remove($gameEntity);
+        $em->flush();
+        return $this->redirectToRoute('app_admin_game');
 
     }
 }

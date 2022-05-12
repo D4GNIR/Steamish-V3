@@ -44,7 +44,7 @@ class Game
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'games')]
     private Collection $genres;
 
-    #[ORM\OneToMany(mappedBy: 'game', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'game',cascade: ["persist","remove"], targetEntity: Comment::class)]
     private Collection $comments;
 
     #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
