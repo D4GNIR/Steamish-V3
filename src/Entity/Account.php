@@ -56,6 +56,9 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Message::class)]
     private $messages;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $nbBanWord;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
@@ -342,5 +345,21 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getNbBanWord(): ?int
+    {
+        return $this->nbBanWord;
+    }
+
+    public function setNbBanWord(?int $nbBanWord): self
+    {
+        $this->nbBanWord = $nbBanWord;
+
+        return $this;
+    }
+
+    public function incrementNbBanWord() {
+        $this->nbBanWord += 1;
     }
 }

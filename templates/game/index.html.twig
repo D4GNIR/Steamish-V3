@@ -3,13 +3,16 @@
 {% block title %}Tous les jeux{% endblock %}
 
 {% block body %}
-    <div class="container my-3">
-        <div class="row">
-            {% for myGame in gameEntities %}
-                <div class="card-game col-12 col-md-4 col-lg-3">
-                    {% include "game/_card.html.twig" %}
-                </div>
-            {% endfor %}
+<div class="container my-3">
+        <a href="{{ path('app_home')}}" class="btn btn-steamish p-1 m-2">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+        </a>
+    <div class="row">
+        {% for myGame in gameEntities %}
+        <div class="card-game col-12 col-md-4 col-lg-3">
+            {% include "game/_card.html.twig" %}
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

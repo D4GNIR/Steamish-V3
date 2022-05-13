@@ -4,6 +4,12 @@
 
 {% block body %}
 <div class="container">
+<div>
+    <a href="{{ path('app_home')}}" class="btn btn-steamish p-1">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+    </a>
+</div>
+
     {% if is_granted("ROLE_ADMIN") %}
     <a href="{{ path('app_forum_create') }}" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus">
             Ajouter un forum

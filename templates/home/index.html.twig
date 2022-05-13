@@ -13,6 +13,12 @@ OK
         alt="Pub1">
 </div>
 <div class="container">
+    {# Lot of BanWorld #}
+    {% if app.user.nbBanWord >= 5 %}
+        <div class="pas-bien text-center">
+            PAS BIEN
+        </div>
+    {% endif %}
     {# Les jeux du moment#}
     <div>
         <h2 class="m-3" id="sorties">Les dernières sorties</h2>

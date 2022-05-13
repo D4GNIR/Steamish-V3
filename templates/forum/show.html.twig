@@ -4,6 +4,9 @@
 
 {% block body %}
 <div class='container'>
+    <a href="{{ path('app_forum')}}" class="btn btn-steamish p-1">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+    </a>
   <h1 class="mt-3">{{ forum.title }}</h1>
   {% if app.user %}
   <a href="{{ path('app_topic_create', {'idForum': forum.id})  }}" class="btn btn-success mt-3 mb-3"><i

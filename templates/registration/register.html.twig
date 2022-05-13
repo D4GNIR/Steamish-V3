@@ -4,6 +4,9 @@
 
 {% block body %}
 <div class="container">
+    <a href="{{ path('app_home')}}" class="btn btn-steamish p-1">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+    </a>
     <h1>Ajouter un compte</h1>
 
     {{ form_start(registrationForm) }}
