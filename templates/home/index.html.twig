@@ -9,33 +9,36 @@ OK
 {% block body %}
 
 <div class="container-fluid p-0 m-0">
-    <img class="img-fluid" src="https://s2.gaming-cdn.com/img/products/11041/hcover/11041.jpg"
-        alt="Pub1">
+    <img class="img-fluid" src="https://s2.gaming-cdn.com/img/products/11041/hcover/11041.jpg" alt="Pub1">
 </div>
 <div class="container">
     {# Lot of BanWorld #}
+    {% if app.user %}
     {% if app.user.nbBanWord >= 5 %}
-        <div class="pas-bien text-center">
-            PAS BIEN
-        </div>
+    <div class="pas-bien text-center">
+        PAS BIEN
+    </div>
     {% endif %}
+    {% endif %}
+
     {# Les jeux du moment#}
     <div>
         <h2 class="m-3" id="sorties">Les dernières sorties</h2>
         <div class="container my-3">
             <div class="row">
                 {% for myGame in lastPublishedGames %}
-                    <div class="card-game col-12 col-md-6 col-lg-4">
-                        {% include "game/_card.html.twig" %}
-                    </div>
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    {% include "game/_card.html.twig" %}
+                </div>
                 {% endfor %}
             </div>
         </div>
     </div>
     {# Bandeau publicitaires#}
     <div class="text-center">
-         <a href="https://www.mcdonalds.fr/" target="_blank"><img class="img-fluid" src=" https://3.bp.blogspot.com/-Jwx6tcp8ZBA/WLdOdv3WZ5I/AAAAAAAAAho/_VfSK6bjIT8Em3g1Qt_14NIXkJVuWWyMQCEw/s1600/bandeau.jpg"
-        alt="Pub 2"></a>
+        <a href="https://www.mcdonalds.fr/" target="_blank"><img class="img-fluid"
+                src=" https://3.bp.blogspot.com/-Jwx6tcp8ZBA/WLdOdv3WZ5I/AAAAAAAAAho/_VfSK6bjIT8Em3g1Qt_14NIXkJVuWWyMQCEw/s1600/bandeau.jpg"
+                alt="Pub 2"></a>
     </div>
     {# es Jeux les plus joués#}
     <div>
@@ -43,9 +46,9 @@ OK
         <div class="container my-3">
             <div class="row">
                 {% for myGame in mostPlayedGames %}
-                    <div class="card-game col-12 col-md-6 col-lg-4">
-                        {% include "game/_card.html.twig" %}
-                    </div>
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    {% include "game/_card.html.twig" %}
+                </div>
                 {% endfor %}
             </div>
         </div>
@@ -53,29 +56,30 @@ OK
 
     {# Bandeau publicitaires 2#}
     <div class="text-center">
-        <a href="https://www.emp-online.fr/" target="_blank"><img class="img-fluid" src="https://blog-fr.orson.io/wp-content/uploads/2020/10/backmarket-displayad-screen-1024x246.png"
-        alt="Pub 3"></a>
+        <a href="https://www.emp-online.fr/" target="_blank"><img class="img-fluid"
+                src="https://blog-fr.orson.io/wp-content/uploads/2020/10/backmarket-displayad-screen-1024x246.png"
+                alt="Pub 3"></a>
     </div>
     {# Review #}
     <div>
         <h2 class="m-3" id="most">Les derniers commentaires</h2>
         <div class="row">
             {% for comment in lastComments %}
-                <div class="card-game col-lg-3 d-flex align-items-stretch">
-                    {% include "review/_cardComment.html.twig" %}
-                </div>
+            <div class="card-game col-lg-3 d-flex align-items-stretch">
+                {% include "review/_cardComment.html.twig" %}
+            </div>
             {% endfor %}
         </div>
     </div>
     {# Meilleures ventes#}
-        <div>
+    <div>
         <h2 class="m-3" id="best">Les meilleures ventes</h2>
         <div class="container my-3">
             <div class="row">
                 {% for myGame in mostBoughtGames %}
-                    <div class="card-game col-12 col-md-6 col-lg-4">
-                        {% include "game/_card.html.twig" %}
-                    </div>
+                <div class="card-game col-12 col-md-6 col-lg-4">
+                    {% include "game/_card.html.twig" %}
+                </div>
                 {% endfor %}
             </div>
         </div>
