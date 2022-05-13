@@ -16,8 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForumController extends AbstractController
 {
     private ForumRepository $forumRepository;
-    private EntityManagerInterface $em;
-
 
     public function __construct(
         ForumRepository $forumRepository,
@@ -25,15 +23,18 @@ class ForumController extends AbstractController
         $this->forumRepository = $forumRepository;
     }
 
-    #[Route('/forum', name: 'app_forum')]
+    // Affichage de tous les forums
+    #[Route('/forums', name: 'app_forum')]
     public function index(): Response
     {
-        $forumEntity = $this->forumRepository->findAll();
+        $forumEntities = $this->forumRepository->findAll();
+
         return $this->render('forum/index.html.twig', [
-            'forumEntity' => $forumEntity,
+            'forumEntities' => $forumEntities,
         ]);
     }
 
+    // Création d'un forum
     #[Route('/forum/create', name: 'app_forum_create')]
     public function forumCreate(Request $request,EntityManagerInterface $em): Response
     {
@@ -53,15 +54,18 @@ class ForumController extends AbstractController
         ]);
     }
 
-    #[Route('/forum/show/forum/{id}', name: 'app_forum_show')]
+    // Détail d'un forum
+    #[Route('/forum/{id}', name: 'app_forum_show')]
     public function showForum(string $id, ForumRepository $forumRepository): Response
     {
         $forum = $forumRepository->findOneBy(['id' => $id]);
+
         return $this->render('forum/show.html.twig', [
             'forum' => $forum
         ]);
     }
 
+    // Edition d'un forum
     #[Route('/forum/edit/{id}', name: 'app_forum_edit')]
     public function editGenre(Forum $forum, Request $request, EntityManagerInterface $em): Response
     {
@@ -81,14 +85,14 @@ class ForumController extends AbstractController
         ]);
     }
 
+    // Suppression d'un forum
     #[Route('/forum/delete/{id}', name: 'app_forum_delete')]
-    public function deleteForum(Forum $forum, Request $request, EntityManagerInterface $em): Response
+    public function deleteForum(Forum $forum, EntityManagerInterface $em): Response
     {
+        $em->remove($forum);
+        $em->flush();
 
-            $em->remove($forum);
-            $em->flush();
-            return $this->redirectToRoute('app_forum');
-
+        return $this->redirectToRoute('app_forum');
     }
     
 }

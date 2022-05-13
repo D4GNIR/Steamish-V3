@@ -47,16 +47,6 @@ class TopicRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-    public function getTopicByForum(Forum $forum, $topic){
-        return $this->createQueryBuilder('t')
-        ->join('t.forum','f')
-        ->where('f = :forum')
-        ->andWhere('t.id = :topic')
-        ->setParameter('forum' , $forum)
-        ->setParameter('topic' , $topic)
-        ->getQuery()
-        ->getSingleResult();
-    }
 
     // /**
     //  * @return Topic[] Returns an array of Topic objects

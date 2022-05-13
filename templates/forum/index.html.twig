@@ -1,6 +1,6 @@
 {% extends 'base-front.html.twig' %}
 
-{% block title %}Bienvenu sur les Forums{% endblock %}
+{% block title %}Bienvenue sur les forums{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -17,17 +17,17 @@
     </a>
     {% endif %}
     <div class="row ">
-        {% for forum in forumEntity %}
+        {% for forum in forumEntities %}
         <div class="col-5 bg-darko m-2 p-2">
             <div class="d-flex justify-content-between">
                 <a class="link" href="{{ path('app_forum_show', {'id': forum.id}) }}">
-                    <h2> {{ forum.title }} </h2>
+                    <h2>{{ forum.title }}</h2>
                 </a>
                 <p>{{ forum.createdAt|date("d/m/Y") }}</p>
             </div>
             <ul>
                 {% for topic in forum.topics %}
-                <li><a href="{{path('app_topic', {'idTopic': topic.id}) }}" class="link">{{ topic.title }}</a></li>
+                <li><a href="{{path('app_topic', {'idForum': forum.id, 'idTopic': topic.id}) }}" class="link">{{ topic.title }}</a></li>
                 {% endfor %}
             </ul>
             {% if is_granted("ROLE_ADMIN") %}
@@ -36,12 +36,12 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#{{ forum.title }}Modal">
+                    data-bs-target="#a{{ forum.id }}">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
             </div>
             <!-- Modal -->
-            <div class="modal fade" id="{{ forum.title }}Modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="a{{ forum.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -49,7 +49,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
                         </div>
                         <div class="modal-body bg-darko">
-                            Etes vous sur de vouloir supprimer {{ forum.title }} ?
+                            Êtes-vous certain de vouloir supprimer {{ forum.title }} ?
                         </div>
                         <div class="modal-footer bg-darko">
                             <a type="button" class="btn btn-danger"
