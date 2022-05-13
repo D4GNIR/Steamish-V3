@@ -6,6 +6,7 @@ use App\Repository\TopicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
 class Topic
@@ -29,7 +30,7 @@ class Topic
     #[ORM\JoinColumn(nullable: false)]
     private $createdBy;
 
-    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class, cascade:['remove', 'persist'])]
     private $messages;
 
     public function __construct()

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\Topic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -21,6 +22,18 @@ class MessageRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Message::class);
+    }
+
+    // Récupérer le topic d'un message
+    public function getMessageByTopic(Topic $topic, $message) {
+        return $this->createQueryBuilder('m')
+            ->join('m.topic', 't')
+            ->where('t = :topic')
+            ->andWhere('m.id = :message')
+            ->setParameter('topic', $topic)
+            ->setParameter('message', $message)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

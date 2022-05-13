@@ -18,7 +18,7 @@
   <table class="table table-hover text-light table-dark">
     <tr class="row">
       <td class="col-lg-3"><b>Nom du topic</b></td>
-      <td class="col-lg-3"><b>Créer par</b></td>
+      <td class="col-lg-3"><b>Créé par</b></td>
       <td class="col-lg-3"><b>Date de création</b></td>
       <td class="col-lg-3"><b>Nombre de messages</b></td>
     </tr>
@@ -26,7 +26,7 @@
     <tr class="row">
       <td class="col-lg-3">
         <div class='d-flex justify-content-between'>
-          <a href="{{path('app_topic', {'idTopic': topic.id}) }}" class="link">
+          <a href="{{path('app_topic', {'idForum': forum.id, 'idTopic': topic.id}) }}" class="link">
             {{ topic.title }}
           </a>
           {% if is_granted("ROLE_ADMIN") or app.user == topic.createdBy %}

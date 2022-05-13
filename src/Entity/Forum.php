@@ -21,7 +21,7 @@ class Forum
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\OneToMany(mappedBy: 'forum', targetEntity: Topic::class)]
+    #[ORM\OneToMany(mappedBy: 'forum', targetEntity: Topic::class, cascade: ['persist', 'remove'])]
     private $topics;
 
     public function __construct()
