@@ -46,7 +46,7 @@ class DeleteBanwordCommand extends Command
             }
         }
         $this->entityManager->flush();
-        $output->writeln($count . ' messages ont étés supprimés.');
+        $output->writeln($count . ' messages ont été supprimés.');
         return Command::SUCCESS;
     }
 }

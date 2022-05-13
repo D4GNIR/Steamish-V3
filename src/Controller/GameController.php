@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\AddCommentType;
+use App\Form\FilterGamesType;
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use App\Repository\GenreRepository;
@@ -11,6 +12,7 @@ use App\Repository\PublisherRepository;
 use Cocur\Slugify\Slugify;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,10 +31,29 @@ class GameController extends AbstractController
 
     // Récupérer tous les jeux
     #[Route('/jeux', name: 'games')]
-    public function getAllGames()
+    public function getAllGames(Request $request, GameRepository $gameRepository, PaginatorInterface $paginator)
     {
+        $qb = $gameRepository->getQbAll();
+
+        $formFilter = $this->createForm(FilterGamesType::class);
+        $formFilter->handleRequest($request);
+
+        if ($formFilter->isSubmitted() && $formFilter->isValid()) {
+            $qb = $this->gameRepository->updateQbByData($qb, $formFilter->getData());  
+        }
+
+
+        $pagination = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+
         return $this->render('game/index.html.twig', [
-            'gameEntities' => $this->gameRepository->findAll()
+            // 'gameEntities' => $this->gameRepository->findAll(),
+            'form' => $formFilter->createView(),
+            'pagination' => $pagination,
         ]);
     }
 

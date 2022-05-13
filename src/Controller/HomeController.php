@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountType;
+use App\Form\FilterGamesType;
 use App\Form\SearchBarType;
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Cocur\Slugify\Slugify;
+use Knp\Component\Pager\PaginatorInterface;
 
 class HomeController extends AbstractController
 {
@@ -107,4 +109,6 @@ class HomeController extends AbstractController
             'formSearch' => $formSearch->createView(),
         ]);
     }
+
+    
 }
