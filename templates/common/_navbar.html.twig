@@ -41,6 +41,7 @@
             {% if app.user %}
               <a href="{{ path('app_logout') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-xmark"></i></a>
               <a href="{{ path('accountSlug', {'slug': app.user.slug}) }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-user-gear"></i></a>
+              <a href="{{ path('app_messagerie', {'idUser': app.user.slug}) }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-comment-dots"></i></a>
                 {% if is_granted("ROLE_ADMIN") %}
                     <a href="{{ path('app_admin') }}" class="btn btn-steamish mt-3"><i class="fa-solid fa-chart-pie"></i></a>
                 {% endif %}

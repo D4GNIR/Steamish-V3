@@ -59,6 +59,12 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nbBanWord;
 
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: DirectMessage::class)]
+    private $directMessages;
+
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: DirectMessage::class)]
+    private $directMessagesReceiver;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
@@ -66,6 +72,8 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
         $this->wallet = 0.0;
         $this->topics = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->directMessages = new ArrayCollection();
+        $this->directMessagesReceiver = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -361,5 +369,65 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function incrementNbBanWord() {
         $this->nbBanWord += 1;
+    }
+
+    /**
+     * @return Collection<int, DirectMessage>
+     */
+    public function getDirectMessages(): Collection
+    {
+        return $this->directMessages;
+    }
+
+    public function addDirectMessage(DirectMessage $directMessage): self
+    {
+        if (!$this->directMessages->contains($directMessage)) {
+            $this->directMessages[] = $directMessage;
+            $directMessage->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDirectMessage(DirectMessage $directMessage): self
+    {
+        if ($this->directMessages->removeElement($directMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($directMessage->getCreatedBy() === $this) {
+                $directMessage->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DirectMessage>
+     */
+    public function getDirectMessagesReceiver(): Collection
+    {
+        return $this->directMessagesReceiver;
+    }
+
+    public function addDirectMessagesReceiver(DirectMessage $directMessagesReceiver): self
+    {
+        if (!$this->directMessagesReceiver->contains($directMessagesReceiver)) {
+            $this->directMessagesReceiver[] = $directMessagesReceiver;
+            $directMessagesReceiver->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDirectMessagesReceiver(DirectMessage $directMessagesReceiver): self
+    {
+        if ($this->directMessagesReceiver->removeElement($directMessagesReceiver)) {
+            // set the owning side to null (unless already changed)
+            if ($directMessagesReceiver->getReceiver() === $this) {
+                $directMessagesReceiver->setReceiver(null);
+            }
+        }
+
+        return $this;
     }
 }
