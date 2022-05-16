@@ -11,7 +11,8 @@
 </div>
 
     {% if is_granted("ROLE_ADMIN") %}
-    <a href="{{ path('app_forum_create') }}" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus">
+    <a href="{{ path('app_forum_create') }}" class="btn btn-success mt-3">
+        <i class="fa-solid fa-circle-plus">
             Ajouter un forum
         </i>
     </a>
@@ -20,7 +21,7 @@
         {% for forum in forumEntities %}
         <div class="col-5 bg-darko m-2 p-2">
             <div class="d-flex justify-content-between">
-                <a class="link" href="{{ path('app_forum_show', {'id': forum.id}) }}">
+                <a class="link" href="{{ path('app_forum_show', {'idForum': forum.id}) }}">
                     <h2>{{ forum.title }}</h2>
                 </a>
                 <p>{{ forum.createdAt|date("d/m/Y") }}</p>

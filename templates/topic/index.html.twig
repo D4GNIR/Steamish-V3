@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-    <a href="{{ path('app_forum_show', {'id': forumEntity.id}) }}" class="btn btn-steamish p-1">
+    <a href="{{ path('app_forum_show', {'idForum': forumEntity.id}) }}" class="btn btn-steamish p-1">
         <i class="fa-solid fa-circle-arrow-left"></i>
     </a>
     <h2>{{ topic.title }}</h2>
@@ -14,12 +14,45 @@
         <div class="d-flex justify-content-between bg-top p-2 rounded-top">
             <p class="message-name">{{ message.createdBy.name }}</p>
             <p class="message-name">{{ message.createdAt|date("m/d/Y") }}</p>
+            <div>
+                {% if is_granted("ROLE_ADMIN") or app.user == message.createdBy %}
+                    <a class="btn btn-steamish" href="{{ path('app_message_edit', {'idForum': forumEntity.id, 'idTopic': topic.id, 'idMessage': message.id}) }}">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#topic_{{ topic.id }}">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                {% endif %}
+                <div class="modal fade" id="topic_{{ topic.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-darko">
+                                <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                            </div>
+                            <div class="modal-body bg-darko">
+                                Êtes-vous certain de vouloir supprimer ce message ?
+                            </div>
+                            <div class="modal-footer bg-darko">
+                                <a type="button" class="btn btn-danger" href="{{ path('app_message_delete', {'idForum': forumEntity.id, 'idTopic': topic.id, 'idMessage': message.id}) }}">
+                                    Oui
+                                </a>
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">
+                                    Non
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <p class="bg-bot p-2 rounded-bottom shadow ">{{ message.content }}</p>
     </div>
     {% endfor %}
+    {% if app.user %}
     <div class="">
         {% include "topic/addMessage.html.twig" %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
