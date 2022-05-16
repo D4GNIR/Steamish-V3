@@ -55,13 +55,14 @@ class ForumController extends AbstractController
     }
 
     // Détail d'un forum
-    #[Route('/forum/{id}', name: 'app_forum_show')]
-    public function showForum(string $id, ForumRepository $forumRepository): Response
+    #[Route('/forum/{idForum}', name: 'app_forum_show')]
+    public function showForum(string $idForum, ForumRepository $forumRepository): Response
     {
-        $forum = $forumRepository->findOneBy(['id' => $id]);
+        $forumEntity = $forumRepository->findOneBy(['id' => $idForum]);
 
         return $this->render('forum/show.html.twig', [
-            'forum' => $forum
+            'forum' => $forumEntity,
+            'idForum' => $forumEntity->getId(),
         ]);
     }
 

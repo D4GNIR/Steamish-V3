@@ -1,7 +1,19 @@
 {% extends 'base-front.html.twig' %}
 
-{% block title %}Tous les jeux d'une langue{% endblock %}
+{% block title %}{{ country.name }}{% endblock %}
 
 {% block body %}
-    <p>LANGUAGE</p>
+    {# <p>LANGUAGE</p> #}
+
+    <div class="container my-3">
+        <h2>Langue : {{ country.nationality }}</h2>
+
+        <div class="row">
+            {% for myGame in countryGames %}
+                <div class="card-game col-12 col-md-4 col-lg-3">
+                    {% include "game/_card.html.twig" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

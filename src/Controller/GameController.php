@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Form\AddCommentType;
 use App\Form\FilterGamesType;
 use App\Repository\CommentRepository;
+use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
@@ -111,18 +112,22 @@ class GameController extends AbstractController
     public function getGamesFromOneGenre(string $slug, GenreRepository $genreRepository)
     {
         $genre = $genreRepository->findOneBy(['slug' => $slug]);
+
         return $this->render('game/genre.html.twig', [
             'genreGames' => $this->gameRepository->getGamesOfOneGenre($slug),
             'genre' => $genre
         ]);
     }
 
-    // // Afficher une page qui contient tous les jeux avec une langue en particulier
-    // #[Route('/jeux/langue/{slug}', name: 'gamesLanguage')]
-    // public function getGamesOfOneLanguage(string $slug)
-    // {
-    //     return $this->render('game/language.html.twig', [
-    //         'myGame' => $this->gameRepository->getALotOfThings($slug)
-    //     ]);
-    // }
+    // Afficher une page qui contient tous les jeux avec une langue en particulier
+    #[Route('/jeux/langue/{slug}', name: 'gamesLanguage')]
+    public function getGamesOfOneLanguage(string $slug, CountryRepository $countryRepository)
+    {
+        $country = $countryRepository->findOneBy(['slug' => $slug]);
+        
+        return $this->render('game/language.html.twig', [
+            'countryGames' => $this->gameRepository->getGamesOfOneLanguage($slug),
+            'country' => $country
+        ]);
+    }
 }

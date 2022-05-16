@@ -38,7 +38,7 @@ class TopicController extends AbstractController
         $this->messageRepository = $messageRepository;
     }
 
-    // Création d'un topic
+    // Création d'un topic avec un message
     #[Route('/forum/{idForum}/topic/create', name: 'app_topic_create')]
     public function topicCreate(
          $idForum,
@@ -73,34 +73,27 @@ class TopicController extends AbstractController
          ]);
     }
 
-    // WARNING : fonction pour créer un message REFAIRE CA
-    // Editer un topic
+    // Edition d'un topic
     #[Route('/forum/{idForum}/topic/edit/{idTopic}', name: 'app_topic_edit')]
     public function topicEdit(
         $idForum,
-        ForumRepository $forumRepository,
         $idTopic,
         Request $request,
         EntityManagerInterface $em
         ): Response
     {
-        $topic = $this->topicRepository->find($idTopic);
-        $user = $this->getUser();
-        $forumEntity = $this->forumRepository->find($idForum);
+        $topicEntity = $this->topicRepository->find($idTopic); // Le topic
+        $forumEntity = $this->forumRepository->find($idForum); // Le forum où est situé le topic
 
-        $form = $this->createForm(AddTopicType::class, $topic);
+        $form = $this->createForm(AddTopicType::class, $topicEntity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $topic->setForum($idForum);
-            $topic->setCreatedAt(new DateTime('now'));
-            $topic->setCreatedBy($user);
-
-            $em->persist($topic);
+            $em->persist($topicEntity);
             $em->flush();
 
             return $this->redirectToRoute('app_topic',[
-                'idTopic' => $topic->getId(),
+                'idTopic' => $topicEntity->getId(),
                 'idForum' => $forumEntity->getId(),
             ]);
         }
@@ -110,7 +103,26 @@ class TopicController extends AbstractController
         ]);
     }
 
-    // Afficher un topic dans un forum
+    // Suppression d'un topic
+    #[Route('/forum/{idForum}/topic/delete/{idTopic}', name: 'app_topic_delete')]
+    public function deleteTopic(
+        $idForum,
+        $idTopic,
+        EntityManagerInterface $em
+        ): Response
+    {
+        $topicEntity = $this->topicRepository->find($idTopic);
+        $forumEntity = $this->forumRepository->find($idForum);
+
+        $em->remove($topicEntity);
+        $em->flush();
+
+        return $this->redirectToRoute('app_forum_show',[
+            'idForum' => $forumEntity->getId(),
+        ]);
+    }
+
+    // Affichage d'un topic dans un forum
     #[Route('/forum/{idForum}/topic/{idTopic}', name: 'app_topic')]
     public function index(
         $idForum,
@@ -143,6 +155,7 @@ class TopicController extends AbstractController
                 'idForum' => $forumEntity->getId(),
             ]);
         }
+
         return $this->render('topic/index.html.twig', [
             'topic' => $topicEntity,
             'form' => $form->createView(),
@@ -150,19 +163,57 @@ class TopicController extends AbstractController
         ]);
     }
 
-    // Suppression d'un topic
-    #[Route('/topic/delete/{idTopic}', name: 'app_topic_delete')]
-    public function deleteTopic($idTopic, Request $request, EntityManagerInterface $em): Response
+    // Edition d'un topic
+    #[Route('/forum/{idForum}/topic/{idTopic}/edit/{idMessage}', name: 'app_message_edit')]
+    public function messageEdit(
+        $idForum,
+        $idTopic,
+        $idMessage,
+        Request $request,
+        EntityManagerInterface $em
+        ): Response
     {
-        $topic = $this->topicRepository->find($idTopic);
+        $messageEntity = $this->messageRepository->find($idMessage);
+        $topicEntity = $this->topicRepository->find($idTopic);
+        $forumEntity = $this->forumRepository->find($idForum);
 
-        // foreach ($topic->getMessages() as $message) {
-        //     dump($message->getContent());
-        // }
+        $form = $this->createForm(AddMessageType::class, $messageEntity);
+        $form->handleRequest($request);
 
-        $em->remove($topic);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($messageEntity);
+            $em->flush();
+
+            return $this->redirectToRoute('app_topic',[
+                'idTopic' => $topicEntity->getId(),
+                'idForum' => $forumEntity->getId(),
+            ]);
+        }
+
+        return $this->render('topic/addTopic.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    
+    // Suppression d'un message
+    #[Route('/forum/{idForum}/topic/{idTopic}/delete/{idMessage}', name: 'app_message_delete')]
+    public function deleteMessage(
+        $idForum,
+        $idTopic,
+        $idMessage,
+        EntityManagerInterface $em
+        ): Response
+    {
+        $messageEntity = $this->messageRepository->find($idMessage);
+        $topicEntity = $this->topicRepository->find($idTopic);
+        $forumEntity = $this->forumRepository->find($idForum);
+
+        $em->remove($messageEntity);
         $em->flush();
 
-        return $this->redirectToRoute('app_forum');
+        return $this->redirectToRoute('app_topic',[
+            'idTopic' => $topicEntity->getId(),
+            'idForum' => $forumEntity->getId(),
+        ]);
     }
 }

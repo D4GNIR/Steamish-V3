@@ -105,8 +105,15 @@ class GameRepository extends ServiceEntityRepository
     }
 
     // Fonction pour récupérer tous les jeux d'une langue en particulier
-    public function getGamesOfOneLanguage() {
-        
+    public function getGamesOfOneLanguage(string $slug) {
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->join('g.countries', 'countries')
+            ->where('countries.slug = :slug')
+            ->setParameter(':slug', $slug)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     public function searchGame(string $value) {

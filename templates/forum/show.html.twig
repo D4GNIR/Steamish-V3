@@ -49,14 +49,14 @@
                   </div>
                   <div class="modal-footer bg-darko">
                     <a type="button" class="btn btn-danger"
-                      href="{{ path('app_topic_delete', {'idTopic': topic.id}) }}">Oui</a>
+                      href="{{ path('app_topic_delete', {'idForum': forum.id, 'idTopic': topic.id}) }}">Oui</a>
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Non</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        {% endif %}
+          {% endif %}
         </div>
       </td>
       <td class="col-lg-3">
